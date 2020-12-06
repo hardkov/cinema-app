@@ -4,6 +4,8 @@ public class Hall {
      private int hallId;
      private int seatsLimit;
 
+     public Hall() {}
+
      public Hall(int hallId, int seatsLimit){
          this.hallId = hallId;
          this.seatsLimit = seatsLimit;
