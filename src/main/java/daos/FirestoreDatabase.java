@@ -18,9 +18,11 @@ public class FirestoreDatabase {
 
     private static final String projectId = "habeja-to-project";
 
+    private static FirestoreDatabase instance;
+
     Firestore db;
 
-    public FirestoreDatabase() throws URISyntaxException {
+    private FirestoreDatabase() {
         try {
             FileInputStream serviceAccount =
                     new FileInputStream("src/main/resources/habeja-to-project-firebase-adminsdk-q0xq4-14a5591339.json");
@@ -35,6 +37,13 @@ public class FirestoreDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static FirestoreDatabase getInstance() {
+        if(instance == null) {
+            instance = new FirestoreDatabase();
+        }
+        return instance;
     }
 
     public Firestore getDb() {
