@@ -6,8 +6,8 @@ import java.util.Date;
 public class Customer extends User {
     private LocalDate dateOfBirth;
 
-    public Customer(String name, String surname, LocalDate dateOfBirth){
-        super(name, surname);
+    public Customer(String login, String name, String surname, LocalDate dateOfBirth){
+        super(login, name, surname);
         this.dateOfBirth = dateOfBirth;
     }
 
