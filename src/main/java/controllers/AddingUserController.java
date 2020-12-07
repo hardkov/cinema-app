@@ -1,5 +1,6 @@
 package controllers;
 
+import daos.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,6 +32,8 @@ public class AddingUserController {
     void addUser(ActionEvent event) {
         String login = name.getText().substring(0, 3) + lastname.getText().substring(0, 3);
         Customer customer = new Customer(login ,name.getText(), lastname.getText(), birthDate.getValue());
+        UserDao userDao = new UserDao();
+        userDao.addUser(customer);
     }
 
 }

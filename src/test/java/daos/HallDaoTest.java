@@ -15,8 +15,7 @@ class HallDaoTest {
 
     @BeforeEach
     void setUp() {
-        FirestoreDatabase database = FirestoreDatabase.getInstance();
-        dao = new HallDao(database.getDb());
+        dao = new HallDao();
     }
 
     @Test

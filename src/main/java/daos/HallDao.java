@@ -14,8 +14,8 @@ public class HallDao {
     private static final String hallPath = "halls";
     Firestore db;
 
-    public HallDao(Firestore db) {
-        this.db = db;
+    public HallDao() {
+        this.db = FirestoreDatabase.getInstance().getDb();
     }
 
     public void addHall(Hall hall) {

@@ -13,8 +13,7 @@ class UserDaoTest {
 
     @BeforeEach
     void setUp() {
-        FirestoreDatabase database = FirestoreDatabase.getInstance();
-        dao = new UserDao(database.getDb());
+        dao = new UserDao();
     }
 
     @Test

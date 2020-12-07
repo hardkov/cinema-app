@@ -13,8 +13,8 @@ public class UserDao {
     private static final String userPath = "user";
     Firestore db;
 
-    public UserDao(Firestore db) {
-        this.db = db;
+    public UserDao() {
+        this.db = FirestoreDatabase.getInstance().getDb();
     }
 
     public void addUser(User user) {
