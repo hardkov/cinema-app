@@ -1,8 +1,10 @@
 plugins {
     id 'java'
+    id 'application'
+    id "org.openjfx.javafxplugin" version "0.0.9"
 }
 
-group 'pl.edu.agh.to2'
+group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -10,5 +12,20 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    compile 'com.google.firebase:firebase-admin:7.0.1'
 }
+
+test {
+    useJUnitPlatform()
+}
+
+apply plugin: 'application'
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml']
+    version = '15.0.1'
+}
+
+mainClassName = 'Main'
