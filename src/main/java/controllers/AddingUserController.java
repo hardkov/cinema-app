@@ -29,7 +29,7 @@ public class AddingUserController {
     private ListView<?> userList;
 
     @FXML
-    void addUser(ActionEvent event) {
+    public void addUser(ActionEvent event) {
         String login = name.getText().substring(0, 3) + lastname.getText().substring(0, 3);
         Customer customer = new Customer(login ,name.getText(), lastname.getText(), birthDate.getValue());
         UserDao userDao = new UserDao();

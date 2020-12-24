@@ -32,7 +32,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("addingUser.fxml"));
+            root = FXMLLoader.load(getClass().getResource("login.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
