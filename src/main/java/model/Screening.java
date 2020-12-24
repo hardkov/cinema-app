@@ -45,4 +45,10 @@ public class Screening {
     public float getBasePrice() {
         return basePrice;
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s %s %s hall: %d seats limit: %d base price: %.2f", movie.getTitle().toString(), movieType.toString(), time.toString(),
+                hall.getHallId(), seatsLimit, basePrice);
+    }
 }
