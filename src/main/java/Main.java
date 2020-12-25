@@ -23,7 +23,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("addScreening.fxml"));
+            root = FXMLLoader.load(getClass().getResource("moviesList.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
