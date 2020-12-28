@@ -1,6 +1,7 @@
 package daos;
 
 import com.google.api.core.ApiFuture;
+import com.google.cloud.AsyncPageImpl;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
@@ -18,9 +19,31 @@ public class HallDao {
         this.db = FirestoreDatabase.getInstance().getDb();
     }
 
-    public void addHall(Hall hall) {
-        String docPath = String.valueOf(hall.getHallId());
-        ApiFuture<WriteResult> future = db.collection(hallPath).document(docPath).set(hall);
+    public boolean addHall(Hall hall) {
+        int id = hall.getHallId();
+        if (isHall(id)) {
+            return false;
+        } else {
+            String docPath = String.valueOf(id);
+            db.collection(hallPath).document(docPath).set(hall);
+            return true;
+        }
+    }
+
+    public boolean removeHall(Hall hall) {
+        int id = hall.getHallId();
+        String docPath = String.valueOf(id);
+        ApiFuture<WriteResult> writeResult = db.collection(hallPath).document(docPath).delete();
+        try {
+            WriteResult result = writeResult.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return writeResult.isDone();
+    }
+
+    public boolean isHall(int id) {
+        return getHall(id) != null;
     }
 
     public Hall getHall(int id) {
@@ -40,5 +63,20 @@ public class HallDao {
             e.printStackTrace();
         }
         return hall;
+    }
+
+    public boolean updateHall(Hall hall) {
+        return addHall(hall);
+    }
+
+    public boolean updateHallSeats(int hallID, int newSeatsLimit) {
+        String docPath = String.valueOf(hallID);
+        ApiFuture<WriteResult> writeResult = db.collection(hallPath).document(docPath).update("seatsLimit", newSeatsLimit);
+        try {
+            WriteResult result = writeResult.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return writeResult.isDone();
     }
 }
