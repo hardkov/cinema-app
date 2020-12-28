@@ -1,7 +1,6 @@
 package daos;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.AsyncPageImpl;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
@@ -21,12 +20,17 @@ public class HallDao {
 
     public boolean addHall(Hall hall) {
         int id = hall.getHallId();
-        if (isHall(id)) {
+        if (doesHallExist(id)) {
             return false;
         } else {
             String docPath = String.valueOf(id);
-            db.collection(hallPath).document(docPath).set(hall);
-            return true;
+            ApiFuture<WriteResult> writeResult = db.collection(hallPath).document(docPath).set(hall);
+            try {
+                writeResult.get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+            return writeResult.isDone();
         }
     }
 
@@ -42,7 +46,7 @@ public class HallDao {
         return writeResult.isDone();
     }
 
-    public boolean isHall(int id) {
+    public boolean doesHallExist(int id) {
         return getHall(id) != null;
     }
 

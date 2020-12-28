@@ -1,12 +1,7 @@
 package daos;
 
-import com.google.cloud.firestore.Firestore;
 import model.Hall;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +21,7 @@ class HallDaoTest {
         // then
         assertEquals(hall.getHallId(), gotHall.getHallId());
         assertEquals(hall.getSeatsLimit(), gotHall.getSeatsLimit());
-        assertTrue(dao.isHall(hall.getHallId()));
+        assertTrue(dao.doesHallExist(hall.getHallId()));
     }
 
     @Test
@@ -37,7 +32,7 @@ class HallDaoTest {
         // when
         dao.removeHall(hallToRemove);
         // then
-        assertFalse(dao.isHall(hallToRemove.getHallId()));
+        assertFalse(dao.doesHallExist(hallToRemove.getHallId()));
     }
 
     @Test
