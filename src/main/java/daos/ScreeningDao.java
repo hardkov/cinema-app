@@ -79,6 +79,36 @@ public class ScreeningDao {
         return db.collection(screeningPath).document(screening.getId());
     }
 
+    public Screening getScreening(String screeningId) {
+        DocumentReference docRef = db.collection(screeningPath).document(screeningId);
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        Screening screening = null;
+        try {
+            DocumentSnapshot document = future.get();
+            if (document.exists()) {
+                MovieDao movieDao = new MovieDao();
+                HallDao hallDao = new HallDao();
+                DocumentReference movieReference = document.get(moveField, DocumentReference.class);
+                Movie movie = movieDao.getMovie(movieReference.getId());
+                MovieType movieType = document.get(typeField, MovieType.class);
+                String timeString = document.get(timeField, String.class);
+                LocalTime time = new DateConverter().getLocalTimeFromString(timeString);
+                DocumentReference hallReference = document.get(hallField, DocumentReference.class);
+                int hallId = Integer.parseInt(hallReference.getId());
+                Hall hall = hallDao.getHall(hallId);
+                int seatsLimit = document.get(seatsLimitField, Integer.class);
+                float basePrice = document.get(basePriceField, Float.class);
+                screening = new Screening(movie, movieType, time, hall, seatsLimit, basePrice);
+            }
+            else {
+                System.out.println(String.format("There is no document %s", docRef.getPath()));
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return screening;
+    }
+
     public List<Screening> getAllScreenings() {
         ApiFuture<QuerySnapshot> future = db.collection(screeningPath).get();
         List<QueryDocumentSnapshot> documents = null;
@@ -115,7 +145,7 @@ public class ScreeningDao {
         if (docData == null) {
             return false;
         }
-        ApiFuture<WriteResult> writeResult = db.collection(moviePath).document(screening.getId()).set(docData);
+        ApiFuture<WriteResult> writeResult = db.collection(screeningPath).document(screening.getId()).set(docData);
         try {
             writeResult.get();
         } catch (InterruptedException | ExecutionException e) {

@@ -6,7 +6,6 @@ import helpers.DateConverter;
 import model.Customer;
 import model.User;
 
-import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,6 +74,10 @@ public class CustomerDao {
             e.printStackTrace();
         }
         return customer;
+    }
+
+    public DocumentReference getCustomerReference(Customer customer) {
+        return db.collection(customerPath).document(customer.getLogin());
     }
 
     public List<Customer> getAllCustomers() {

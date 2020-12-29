@@ -8,4 +8,5 @@ public class DaoConstants {
     public static final String discountPath = "discount";
     public static final String moviePath = "movie";
     public static final String screeningPath = "screening";
+    public static final String ticketPath = "ticket";
 }

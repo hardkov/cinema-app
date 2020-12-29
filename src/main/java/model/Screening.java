@@ -22,6 +22,11 @@ public class Screening {
         this.basePrice = basePrice;
     }
 
+    public Screening(String id, Movie movie, MovieType movieType, LocalTime time, Hall hall, int seatsLimit, float basePrice) {
+        this(movie, movieType, time, hall, seatsLimit, basePrice);
+        this.id = id;
+    }
+
     public Movie getMovie() {
         return movie;
     }

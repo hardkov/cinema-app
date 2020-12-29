@@ -1,6 +1,7 @@
 package model;
 
 public class Ticket {
+    private String id;
     private Screening screening;
     private Customer customer;
     private float price;
@@ -30,5 +31,13 @@ public class Ticket {
 
     public int getSeatId() {
         return seatId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
