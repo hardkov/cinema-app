@@ -3,6 +3,7 @@ package model;
 import java.time.LocalTime;
 
 public class Screening {
+    private String id;
     private Movie movie;
     private MovieType movieType;
     private LocalTime time;
@@ -10,8 +11,7 @@ public class Screening {
     private int seatsLimit;
     private float basePrice;
 
-    public Screening() {
-    }
+    public Screening() { }
 
     public Screening(Movie movie, MovieType movieType, LocalTime time, Hall hall, int seatsLimit, float basePrice) {
         this.movie = movie;
@@ -44,6 +44,14 @@ public class Screening {
 
     public float getBasePrice() {
         return basePrice;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

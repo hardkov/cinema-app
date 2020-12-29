@@ -82,6 +82,10 @@ public class MovieDao {
         return movie;
     }
 
+    public DocumentReference getMovieReference(Movie movie) {
+        return db.collection(moviePath).document(movie.getTitle());
+    }
+
     public List<Movie> getAllMovies() {
         ApiFuture<QuerySnapshot> future = db.collection(moviePath).get();
         List<QueryDocumentSnapshot> documents = null;

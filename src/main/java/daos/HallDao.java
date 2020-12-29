@@ -1,10 +1,12 @@
 package daos;
 
 import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import model.Hall;
 
+import javax.swing.text.Document;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -34,6 +36,10 @@ public class HallDao {
 
     public Hall getHall(int id) {
         return hallGenericDao.getObject(hallPath, String.valueOf(id));
+    }
+
+    public DocumentReference getHallReference(Hall hall) {
+        return db.collection(hallPath).document(String.valueOf(hall.getHallId()));
     }
 
     public List<Hall> getAllHalls() {
