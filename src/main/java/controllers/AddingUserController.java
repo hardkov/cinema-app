@@ -1,6 +1,6 @@
 package controllers;
 
-import daos.UserDao;
+import daos.CustomerDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,8 +8,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import model.Customer;
-
-import java.time.LocalDate;
 
 public class AddingUserController {
 
@@ -32,8 +30,8 @@ public class AddingUserController {
     public void addUser(ActionEvent event) {
         String login = name.getText().substring(0, 3) + lastname.getText().substring(0, 3);
         Customer customer = new Customer(login ,name.getText(), lastname.getText(), birthDate.getValue());
-        UserDao userDao = new UserDao();
-        userDao.addUser(customer);
+        CustomerDao customerDao = new CustomerDao();
+        customerDao.addCustomer(customer);
     }
 
 }

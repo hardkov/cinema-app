@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import model.User;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -75,7 +76,11 @@ public class GenericDao<T> {
     }
 
     public boolean removeObject(String collectionPath, String docPath) {
-        ApiFuture<WriteResult> writeResult = db.collection(collectionPath).document(docPath).delete();
+        return removeObject(db.collection(collectionPath).document(docPath));
+    }
+
+    public boolean removeObject(DocumentReference docRef) {
+        ApiFuture<WriteResult> writeResult = docRef.delete();
         try {
             writeResult.get();
         } catch (InterruptedException | ExecutionException e) {
