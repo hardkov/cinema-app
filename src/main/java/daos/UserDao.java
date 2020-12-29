@@ -2,7 +2,7 @@ package daos;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
-import model.Hall;
+import model.Customer;
 import model.User;
 
 import java.util.ArrayList;
@@ -17,8 +17,37 @@ public class UserDao {
         this.db = FirestoreDatabase.getInstance().getDb();
     }
 
-    public void addUser(User user) {
-        ApiFuture<WriteResult> addedDocRef = db.collection(userPath).document(user.getLogin()).set(user);
+    public boolean addUser(User user) {
+        String login = user.getLogin();
+        if (doesUserExist(login)) {
+            return false;
+        } else {
+            ApiFuture<WriteResult> writeResult = db.collection(userPath).document(login).set(user);
+            try {
+                writeResult.get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+            return writeResult.isDone();
+        }
+    }
+
+    public User getUser(String login) {
+        DocumentReference docRef = db.collection(userPath).document(login);
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        User user = null;
+        try {
+            DocumentSnapshot document = future.get();
+            if (document.exists()) {
+                user = document.toObject(User.class);
+            }
+            else {
+                System.out.println(String.format("There is no user with login: %s", login));
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     public List<User> getAllUsers() {
@@ -34,5 +63,46 @@ public class UserDao {
             users.add(document.toObject(User.class));
         }
         return users;
+    }
+
+    public boolean doesUserExist(String login) {
+        return getUser(login) != null;
+    }
+
+    public boolean removeUser(User user) {
+        String login = user.getLogin();
+        ApiFuture<WriteResult> writeResult = db.collection(userPath).document(login).delete();
+        try {
+            writeResult.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return writeResult.isDone();
+    }
+
+    public boolean updateUser(User user) {
+        return addUser(user);
+    }
+
+    public boolean updateUserSurname(String login, String newSurname) {
+        ApiFuture<WriteResult> writeResult = db.collection(userPath).document(login).update("surname", newSurname);
+        try {
+            writeResult.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return writeResult.isDone();
+    }
+
+    public boolean updateUserName(String login, String newName) {
+        ApiFuture<WriteResult> writeResult = db.collection(userPath).document(login).update("name", newName);
+        try {
+            writeResult.get();
+            System.out.println("here");
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        System.out.println("return");
+        return writeResult.isDone();
     }
 }
