@@ -21,6 +21,10 @@ public class GenericDao<T> {
     }
 
     public boolean addObject(String collectionPath, String docPath, T t) {
+        return addObject(collectionPath, docPath, t, true);
+    }
+
+    private boolean addObject(String collectionPath, String docPath, T t, boolean checkIfExists) {
         if (doesObjectExist(collectionPath, docPath)) {
             return false;
         } else {
@@ -90,7 +94,7 @@ public class GenericDao<T> {
     }
 
     public boolean updateObject(String collectionPath, String docPath, T t) {
-        return addObject(collectionPath, docPath, t);
+        return addObject(collectionPath, docPath, t, false);
     }
 
     public boolean updateField(String collectionPath, String docPath, String fieldName, Object newValue) {

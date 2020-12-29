@@ -3,10 +3,7 @@ package daos;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import helpers.DateConverter;
-import model.Customer;
-import model.Employee;
-import model.Permission;
-import model.User;
+import model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,8 +25,12 @@ public class EmployeeDao {
     }
 
     public boolean addEmployee(Employee employee) {
+        return addEmployee(employee, true);
+    }
+
+    private boolean addEmployee(Employee employee, boolean checkIfExists) {
         String login = employee.getLogin();
-        if (doesEmployeeExist(login)) {
+        if (checkIfExists && doesEmployeeExist(login)) {
             return false;
         }
         // creating user
@@ -118,7 +119,7 @@ public class EmployeeDao {
     }
 
     public boolean updateEmployee(Employee employee) {
-        return addEmployee(employee);
+        return addEmployee(employee, false);
     }
 
     public boolean updateEmployeeSurname(String login, String newSurname) {

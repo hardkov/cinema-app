@@ -27,8 +27,12 @@ public class CustomerDao {
     }
 
     public boolean addCustomer(Customer customer) {
+        return addCustomer(customer, true);
+    }
+
+    private boolean addCustomer(Customer customer, boolean checkIfExists) {
         String login = customer.getLogin();
-        if (doesCustomerExist(login)) {
+        if (checkIfExists && doesCustomerExist(login)) {
             return false;
         }
         // creating user
@@ -116,7 +120,7 @@ public class CustomerDao {
     }
 
     public boolean updateCustomer(Customer customer) {
-        return addCustomer(customer);
+        return addCustomer(customer, false);
     }
 
     public boolean updateCustomerSurname(String login, String newSurname) {
