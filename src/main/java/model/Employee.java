@@ -1,7 +1,9 @@
 package model;
 
-public class Employee extends User{
+public class Employee extends User {
     private Permission permissions;
+
+    public Employee() {}
 
     public Employee(String login, String name, String surname, Permission permissions){
         super(login, name, surname);

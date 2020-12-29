@@ -31,8 +31,9 @@ class CustomerDaoTest {
     @Test
     public void testAddingToDataBase() {
         // given
-        int prevSize = dao.getAllCustomers().size();
         Customer newCustomer = new Customer("addaac","Ada", "Bera", LocalDate.of(1998, 3, 20));
+        dao.removeCustomer(newCustomer);
+        int prevSize = dao.getAllCustomers().size();
         // when
         dao.addCustomer(newCustomer);
         // then
