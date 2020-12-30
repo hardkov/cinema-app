@@ -3,6 +3,7 @@ package daos;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import model.*;
+import queryBuilders.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,10 +18,10 @@ public class TicketDao {
     Firestore db;
     GenericDao<Ticket> ticketGenericDao;
 
-    private static final String screeningField = "screening";
-    private static final String customerField = "customer";
-    private static final String priceField = "price";
-    private static final String seatIdField = "seatId";
+    public static final String screeningField = "screening";
+    public static final String customerField = "customer";
+    public static final String priceField = "price";
+    public static final String seatIdField = "seatId";
 
     public TicketDao() {
         this.db = FirestoreDatabase.getInstance().getDb();
@@ -71,15 +72,7 @@ public class TicketDao {
         try {
             DocumentSnapshot document = future.get();
             if (document.exists()) {
-                ScreeningDao screeningDao = new ScreeningDao();
-                CustomerDao customerDao = new CustomerDao();
-                DocumentReference screeningReference = document.get(screeningField, DocumentReference.class);
-                Screening screening = screeningDao.getScreeningWithScreeningId(screeningReference.getId());
-                DocumentReference customerReference = document.get(customerField, DocumentReference.class);
-                Customer customer = customerDao.getCustomer(customerReference.getId());
-                float price = document.get(priceField, Float.class);
-                int seatId = document.get(seatIdField, Integer.class);
-                ticket = new Ticket(screening, customer, price, seatId);
+                ticket = getTicketFromDocumentSnapshot(document);
             }
             else {
                 System.out.println(String.format("There is no document %s", docRef.getPath()));
@@ -96,16 +89,35 @@ public class TicketDao {
         List<Ticket> tickets = new ArrayList<>();
         try {
             documents = future.get().getDocuments();
-            ScreeningDao screeningDao = new ScreeningDao();
-            CustomerDao customerDao = new CustomerDao();
             for (QueryDocumentSnapshot document : documents) {
-                DocumentReference screeningReference = document.get(screeningField, DocumentReference.class);
-                Screening screening = screeningDao.getScreeningWithScreeningId(screeningReference.getId());
-                DocumentReference customerReference = document.get(customerField, DocumentReference.class);
-                Customer customer = customerDao.getCustomer(customerReference.getId());
-                float price = document.get(priceField, Float.class);
-                int seatId = document.get(seatIdField, Integer.class);
-                tickets.add(new Ticket(screening, customer, price, seatId));
+                tickets.add(getTicketFromDocumentSnapshot(document));
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return tickets;
+    }
+
+    public Ticket getTicketFromDocumentSnapshot(DocumentSnapshot document) {
+        ScreeningDao screeningDao = new ScreeningDao();
+        CustomerDao customerDao = new CustomerDao();
+        DocumentReference screeningReference = document.get(screeningField, DocumentReference.class);
+        Screening screening = screeningDao.getScreeningWithScreeningId(screeningReference.getId());
+        DocumentReference customerReference = document.get(customerField, DocumentReference.class);
+        Customer customer = customerDao.getCustomer(customerReference.getId());
+        float price = document.get(priceField, Float.class);
+        int seatId = document.get(seatIdField, Integer.class);
+        return new Ticket(screening, customer, price, seatId);
+    }
+
+    public List<Ticket> getAllTicketsWithQuery(QueryBuilder builder) {
+        CollectionReference collectionReference = db.collection(ticketPath);
+        Query query = builder.build(collectionReference);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+        List<Ticket> tickets = new ArrayList<>();
+        try {
+            for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                tickets.add(getTicketFromDocumentSnapshot(document));
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
