@@ -2,13 +2,13 @@ package daos;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
+import queryBuilders.QueryBuilder;
 import helpers.DateConverter;
 import model.Hall;
 import model.Movie;
 import model.MovieType;
 import model.Screening;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import static daos.DaoConstants.moviePath;
 import static daos.DaoConstants.screeningPath;
 
 public class ScreeningDao {
@@ -24,12 +23,12 @@ public class ScreeningDao {
     Firestore db;
     GenericDao<Screening> screeningGenericDao;
 
-    private static final String moveField = "movie";
-    private static final String typeField = "type";
-    private static final String timeField = "time";
-    private static final String hallField = "hall";
-    private static final String seatsLimitField = "seatsLimit";
-    private static final String basePriceField = "basePrice";
+    public static final String moveField = "movie";
+    public static final String typeField = "type";
+    public static final String timeField = "time";
+    public static final String hallField = "hall";
+    public static final String seatsLimitField = "seatsLimit";
+    public static final String basePriceField = "basePrice";
 
     public ScreeningDao() {
         this.db = FirestoreDatabase.getInstance().getDb();
@@ -79,26 +78,14 @@ public class ScreeningDao {
         return db.collection(screeningPath).document(screening.getId());
     }
 
-    public Screening getScreening(String screeningId) {
+    public Screening getScreeningWithScreeningId(String screeningId) {
         DocumentReference docRef = db.collection(screeningPath).document(screeningId);
         ApiFuture<DocumentSnapshot> future = docRef.get();
         Screening screening = null;
         try {
             DocumentSnapshot document = future.get();
             if (document.exists()) {
-                MovieDao movieDao = new MovieDao();
-                HallDao hallDao = new HallDao();
-                DocumentReference movieReference = document.get(moveField, DocumentReference.class);
-                Movie movie = movieDao.getMovie(movieReference.getId());
-                MovieType movieType = document.get(typeField, MovieType.class);
-                String timeString = document.get(timeField, String.class);
-                LocalTime time = new DateConverter().getLocalTimeFromString(timeString);
-                DocumentReference hallReference = document.get(hallField, DocumentReference.class);
-                int hallId = Integer.parseInt(hallReference.getId());
-                Hall hall = hallDao.getHall(hallId);
-                int seatsLimit = document.get(seatsLimitField, Integer.class);
-                float basePrice = document.get(basePriceField, Float.class);
-                screening = new Screening(movie, movieType, time, hall, seatsLimit, basePrice);
+                screening = getScreeningFromDocumentSnapshot(document);
             }
             else {
                 System.out.println(String.format("There is no document %s", docRef.getPath()));
@@ -115,20 +102,8 @@ public class ScreeningDao {
         List<Screening> screenings = new ArrayList<>();
         try {
             documents = future.get().getDocuments();
-            MovieDao movieDao = new MovieDao();
-            HallDao hallDao = new HallDao();
             for (QueryDocumentSnapshot document : documents) {
-                DocumentReference movieReference = document.get(moveField, DocumentReference.class);
-                Movie movie = movieDao.getMovie(movieReference.getId());
-                MovieType movieType = document.get(typeField, MovieType.class);
-                String timeString = document.get(timeField, String.class);
-                LocalTime time = new DateConverter().getLocalTimeFromString(timeString);
-                DocumentReference hallReference = document.get(hallField, DocumentReference.class);
-                int hallId = Integer.parseInt(hallReference.getId());
-                Hall hall = hallDao.getHall(hallId);
-                int seatsLimit = document.get(seatsLimitField, Integer.class);
-                float basePrice = document.get(basePriceField, Float.class);
-                screenings.add(new Screening(movie, movieType, time, hall, seatsLimit, basePrice));
+                screenings.add(getScreeningFromDocumentSnapshot(document));
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -136,7 +111,43 @@ public class ScreeningDao {
         return screenings;
     }
 
+    public List<Screening> getAllScreeningsWithQuery(QueryBuilder builder) {
+        CollectionReference collectionReference = db.collection(screeningPath);
+        Query query = builder.build(collectionReference);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+        List<Screening> screenings = new ArrayList<>();
+        try {
+            for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                screenings.add(getScreeningFromDocumentSnapshot(document));
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return screenings;
+    }
+
+    private Screening getScreeningFromDocumentSnapshot(DocumentSnapshot document) {
+        MovieDao movieDao = new MovieDao();
+        HallDao hallDao = new HallDao();
+        String id = document.getId();
+        DocumentReference movieReference = document.get(moveField, DocumentReference.class);
+        Movie movie = movieDao.getMovie(movieReference.getId());
+        MovieType movieType = document.get(typeField, MovieType.class);
+        String timeString = document.get(timeField, String.class);
+        LocalTime time = new DateConverter().getLocalTimeFromString(timeString);
+        DocumentReference hallReference = document.get(hallField, DocumentReference.class);
+        int hallId = Integer.parseInt(hallReference.getId());
+        Hall hall = hallDao.getHall(hallId);
+        int seatsLimit = document.get(seatsLimitField, Integer.class);
+        float basePrice = document.get(basePriceField, Float.class);
+        return new Screening(id, movie, movieType, time, hall, seatsLimit, basePrice);
+    }
+
     public boolean removeScreening(Screening screening) {
+        if (screening.getId() == null) {
+            System.out.println("Screening has no id");
+            return false;
+        }
         return screeningGenericDao.removeObject(screeningPath, screening.getId());
     }
 

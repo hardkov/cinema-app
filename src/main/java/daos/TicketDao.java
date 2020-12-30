@@ -2,10 +2,8 @@ package daos;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
-import helpers.DateConverter;
 import model.*;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,7 +74,7 @@ public class TicketDao {
                 ScreeningDao screeningDao = new ScreeningDao();
                 CustomerDao customerDao = new CustomerDao();
                 DocumentReference screeningReference = document.get(screeningField, DocumentReference.class);
-                Screening screening = screeningDao.getScreening(screeningReference.getId());
+                Screening screening = screeningDao.getScreeningWithScreeningId(screeningReference.getId());
                 DocumentReference customerReference = document.get(customerField, DocumentReference.class);
                 Customer customer = customerDao.getCustomer(customerReference.getId());
                 float price = document.get(priceField, Float.class);
@@ -102,7 +100,7 @@ public class TicketDao {
             CustomerDao customerDao = new CustomerDao();
             for (QueryDocumentSnapshot document : documents) {
                 DocumentReference screeningReference = document.get(screeningField, DocumentReference.class);
-                Screening screening = screeningDao.getScreening(screeningReference.getId());
+                Screening screening = screeningDao.getScreeningWithScreeningId(screeningReference.getId());
                 DocumentReference customerReference = document.get(customerField, DocumentReference.class);
                 Customer customer = customerDao.getCustomer(customerReference.getId());
                 float price = document.get(priceField, Float.class);

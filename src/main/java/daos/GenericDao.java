@@ -2,14 +2,10 @@ package daos;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
-import model.User;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import static daos.DaoConstants.userPath;
 
 public class GenericDao<T> {
     Firestore db;
