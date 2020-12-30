@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalTime;
+import java.util.Objects;
 
 public class Screening {
     private String id;
@@ -57,6 +58,24 @@ public class Screening {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Screening)) return false;
+        Screening screening = (Screening) o;
+        return seatsLimit == screening.seatsLimit &&
+                Float.compare(screening.basePrice, basePrice) == 0 &&
+                movie.equals(screening.movie) &&
+                movieType == screening.movieType &&
+                time.equals(screening.time) &&
+                hall.equals(screening.hall);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movie, movieType, time, hall, seatsLimit, basePrice);
     }
 
     @Override

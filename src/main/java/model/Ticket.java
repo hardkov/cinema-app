@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Ticket {
     private String id;
     private Screening screening;
@@ -39,5 +41,21 @@ public class Ticket {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ticket)) return false;
+        Ticket ticket = (Ticket) o;
+        return Float.compare(ticket.price, price) == 0 &&
+                seatId == ticket.seatId &&
+                screening.equals(ticket.screening) &&
+                customer.equals(ticket.customer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(screening, customer, price, seatId);
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class User {
     private String login;
     private String name;
@@ -23,5 +25,20 @@ public class User {
 
     public String getLogin() {
         return login;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return login.equals(user.login) &&
+                name.equals(user.name) &&
+                surname.equals(user.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, name, surname);
     }
 }

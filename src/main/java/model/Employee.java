@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Employee extends User {
     private Permission permissions;
 
@@ -12,6 +14,19 @@ public class Employee extends User {
 
     public Permission getPermissions() {
         return permissions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return permissions == employee.permissions;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(permissions);
     }
 }
 

@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 public class Customer extends User {
     private LocalDate dateOfBirth;
@@ -15,5 +16,18 @@ public class Customer extends User {
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Customer)) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(dateOfBirth, customer.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dateOfBirth);
     }
 }
