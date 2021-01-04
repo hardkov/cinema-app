@@ -1,29 +1,24 @@
-import com.google.cloud.firestore.Firestore;
-import daos.FirestoreDatabase;
-import daos.HallDao;
-import daos.UserDao;
-import model.*;
 
-import java.net.URISyntaxException;
-import java.time.LocalDate;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.time.LocalTime;
 
 public class Main extends Application {
+    static Stage primaryStage;
+
     public static void main(String[] args){
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("moviesList.fxml"));
+            root = FXMLLoader.load(getClass().getResource("adminPanel.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,4 +26,5 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 }
