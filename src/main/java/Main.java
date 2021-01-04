@@ -18,7 +18,7 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("adminPanel.fxml"));
+            root = FXMLLoader.load(getClass().getResource("login.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
