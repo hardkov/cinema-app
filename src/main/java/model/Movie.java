@@ -42,4 +42,9 @@ public class Movie {
     public int hashCode() {
         return Objects.hash(title, date, genre);
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s, %s, genre: %s", title, date.toString(), genre);
+    }
 }

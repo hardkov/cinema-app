@@ -34,4 +34,9 @@ public class Hall {
     public int hashCode() {
         return Objects.hash(hallId, seatsLimit);
     }
+
+    @Override
+    public String toString(){
+         return String.format("id: %d, seats limit: %d", hallId, seatsLimit);
+    }
 }
