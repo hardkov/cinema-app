@@ -20,6 +20,7 @@
                   <TextField fx:id="seatsLimit" layoutX="81.0" layoutY="44.0" />
                   <Text layoutX="35.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hall id" />
                   <Text layoutX="8.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="seats limit" />
+                  <Button fx:id="home" layoutX="11.0" layoutY="80.0" mnemonicParsing="false" onAction="#home" text="Home" />
                </children>
             </AnchorPane>
          </children>

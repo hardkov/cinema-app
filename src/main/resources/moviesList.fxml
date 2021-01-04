@@ -12,17 +12,18 @@
    <children>
       <VBox layoutX="250.0" layoutY="27.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ListView fx:id="MoviesList" prefHeight="290.0" prefWidth="600.0" />
+            <ListView fx:id="moviesList" prefHeight="290.0" prefWidth="600.0" />
             <AnchorPane prefHeight="117.0" prefWidth="600.0">
                <children>
                   <Button fx:id="addMovie" layoutX="268.0" layoutY="79.0" mnemonicParsing="false" onAction="#addMovie" text="Add " />
-                  <Button fx:id="removeMovie" layoutX="508.0" layoutY="80.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
+                  <Button fx:id="removeMovie" layoutX="383.0" layoutY="79.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
                   <TextField fx:id="title" layoutX="63.0" layoutY="8.0" />
                   <Text layoutX="22.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="title" />
                   <TextField fx:id="genre" layoutX="63.0" layoutY="79.0" />
                   <Text layoutX="14.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="genre" />
                   <DatePicker fx:id="date" layoutX="63.0" layoutY="44.0" />
                   <Text layoutX="18.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
+                  <Button fx:id="home" layoutX="524.0" layoutY="78.0" mnemonicParsing="false" onAction="#home" text="Home" />
                </children>
             </AnchorPane>
          </children>
