@@ -13,7 +13,12 @@ public class AdminPanelController {
     }
 
     public void people(ActionEvent event) {
-        System.out.println("People button pressed");
+        try{
+            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("peopleList.fxml"));
+            Redirect.redirectTo(pane, event);
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public void halls(ActionEvent event) {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PeopleListController">
+   <children>
+      <VBox layoutX="250.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ListView fx:id="peopleList" prefHeight="275.0" prefWidth="600.0" />
+            <AnchorPane prefHeight="143.0" prefWidth="600.0">
+               <children>
+                  <TextField fx:id="login" layoutX="84.0" layoutY="14.0" />
+                  <TextField fx:id="name" layoutX="84.0" layoutY="56.0" />
+                  <TextField fx:id="surname" layoutX="84.0" layoutY="97.0" />
+                  <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
+                  <Text layoutX="14.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+                  <Text layoutX="14.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname" />
+                  <Button fx:id="addPerson" layoutX="300.0" layoutY="97.0" mnemonicParsing="false" onAction="#addPerson" text="Add" />
+                  <Button fx:id="removePerson" layoutX="402.0" layoutY="97.0" mnemonicParsing="false" onAction="#removePerson" text="Remove" />
+                  <Button fx:id="home" layoutX="524.0" layoutY="97.0" mnemonicParsing="false" onAction="#home" text="Home" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
