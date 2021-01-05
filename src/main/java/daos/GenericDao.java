@@ -21,7 +21,7 @@ public class GenericDao<T> {
     }
 
     private boolean addObject(String collectionPath, String docPath, T t, boolean checkIfExists) {
-        if (doesObjectExist(collectionPath, docPath)) {
+        if (doesObjectExist(collectionPath, docPath) && checkIfExists) {
             return false;
         } else {
             ApiFuture<WriteResult> writeResult = db.collection(collectionPath).document(docPath).set(t);
