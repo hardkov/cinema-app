@@ -1,7 +1,13 @@
 package controllers;
 
+import comparators.GenreComparator;
+import comparators.MovieCreatingDateComparator;
+import comparators.TitleComparator;
 import daos.MovieDao;
 import helpers.Redirect;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +22,8 @@ import model.MovieGenre;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MoviesListController implements Initializable {
@@ -33,9 +41,22 @@ public class MoviesListController implements Initializable {
     @FXML
     public ListView<Movie> moviesList;
 
+    @FXML
+    public ComboBox<Comparator<Movie>> moviesOrder;
+
+    private SortedList moviesSortedList;
+    private ObservableList<Comparator<Movie>> moviesComparators;
+
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
         genre.getItems().setAll(MovieGenre.values());
+        moviesComparators = FXCollections.observableArrayList(
+                new TitleComparator(),
+                new MovieCreatingDateComparator(),
+                new GenreComparator()
+        );
+        moviesOrder.setItems(moviesComparators);
+        moviesOrder.getSelectionModel().selectFirst();
     }
 
     public void home(ActionEvent event){
@@ -48,7 +69,10 @@ public class MoviesListController implements Initializable {
     }
 
     private void loadData(){
-        moviesList.getItems().addAll(movieDao.getAllMovies());
+        List<Movie> list = movieDao.getAllMovies();
+        ObservableList<Movie> observableList = FXCollections.observableList(list);
+        moviesSortedList = observableList.sorted();
+        moviesList.setItems(moviesSortedList);
     }
 
     public void addMovie(ActionEvent event) {
@@ -59,15 +83,17 @@ public class MoviesListController implements Initializable {
         );
 
         movieDao.addMovie(movie);
-
-        moviesList.getItems().add(movie);
+        loadData();
     }
 
     public void removeMovie(ActionEvent event) {
         Movie movie = moviesList.getSelectionModel().getSelectedItem();
-
         movieDao.removeMovie(movie);
+        loadData();
+    }
 
-        moviesList.getItems().remove(movie);
+    @FXML
+    public void onSortByComparator() {
+        moviesSortedList.setComparator(moviesOrder.getSelectionModel().getSelectedItem());
     }
 }
