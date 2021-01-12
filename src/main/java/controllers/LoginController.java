@@ -4,11 +4,8 @@ import helpers.Redirect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import model.User;
 import utils.Session;
 
@@ -24,22 +21,20 @@ public class LoginController {
 
     @FXML
     public void login(ActionEvent event) {
-        System.out.println(username.getText());
+        String login = username.getText();
+        String pass = password.getText();
+        System.out.println(login);
         System.out.println(password.getText());
 
-        // authenticate
-
         UserDao userDao = new UserDao();
-        User user = userDao.getUser(username.getText());
-        Session session = Session.getSession();
-        session.setCurrentUser(user);
-
-        try{
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("adminPanel.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
+        User user = userDao.getUser(login);
+        if (user != null && user.verifyPassword(pass)) {
+            try{
+                Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("adminPanel.fxml"));
+                Redirect.redirectTo(pane, event);
+            } catch (IOException e){
+                throw new RuntimeException(e);
+            }
         }
-
     }
 }
