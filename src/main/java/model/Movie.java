@@ -6,11 +6,11 @@ import java.util.Objects;
 public class Movie {
     private String title;
     private LocalDate date;
-    private String genre;
+    private MovieGenre genre;
 
-    public Movie(){}
+    public Movie() {}
 
-    public Movie(String title, LocalDate date, String genre){
+    public Movie(String title, LocalDate date, MovieGenre genre) {
         this.title = title;
         this.date = date;
         this.genre = genre;
@@ -24,7 +24,7 @@ public class Movie {
         return date;
     }
 
-    public String getGenre() {
+    public MovieGenre getGenre() {
         return genre;
     }
 

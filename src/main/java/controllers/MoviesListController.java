@@ -7,10 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import model.Movie;
+import model.MovieGenre;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +25,7 @@ public class MoviesListController implements Initializable {
     public TextField title;
 
     @FXML
-    public TextField genre;
+    public ComboBox<MovieGenre> genre;
 
     @FXML
     public DatePicker date;
@@ -33,6 +35,7 @@ public class MoviesListController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
+        genre.getItems().setAll(MovieGenre.values());
     }
 
     public void home(ActionEvent event){
@@ -52,7 +55,7 @@ public class MoviesListController implements Initializable {
         Movie movie = new Movie(
                 title.getText(),
                 date.getValue(),
-                genre.getText()
+                genre.getValue()
         );
 
         movieDao.addMovie(movie);

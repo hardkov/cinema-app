@@ -70,7 +70,7 @@ public class MovieDao {
                 String movieTitle = document.get(titleField, String.class);
                 String movieDateString = document.get(dateField, String.class);
                 LocalDate moveDate = new DateConverter().getLocalDateFromString(movieDateString);
-                String movieGenre = document.get(genreField, String.class);
+                MovieGenre movieGenre = document.get(genreField, MovieGenre.class);
                 movie = new Movie(movieTitle, moveDate, movieGenre);
             }
             else {
@@ -96,7 +96,7 @@ public class MovieDao {
                 String movieTitle = document.get(titleField, String.class);
                 String movieDateString = document.get(dateField, String.class);
                 LocalDate moveDate = new DateConverter().getLocalDateFromString(movieDateString);
-                String movieGenre = document.get(genreField, String.class);
+                MovieGenre movieGenre = document.get(genreField, MovieGenre.class);
                 Movie movie = new Movie(movieTitle, moveDate, movieGenre);
                 movies.add(movie);
             }
