@@ -1,4 +1,5 @@
 package controllers;
+import daos.UserDao;
 import helpers.Redirect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.User;
 
 import java.io.IOException;
 
@@ -21,15 +23,19 @@ public class LoginController {
 
     @FXML
     public void login(ActionEvent event) {
-        System.out.println(username.getText());
+        String login = username.getText();
+        String pass = password.getText();
+        System.out.println(login);
         System.out.println(password.getText());
-
-        try{
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("adminPanel.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
+        UserDao userDao = new UserDao();
+        User user = userDao.getUser(login);
+        if (user != null && user.verifyPassword(pass)) {
+            try{
+                Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("adminPanel.fxml"));
+                Redirect.redirectTo(pane, event);
+            } catch (IOException e){
+                throw new RuntimeException(e);
+            }
         }
-
     }
 }

@@ -1,15 +1,35 @@
 package model;
 
+import utils.PasswordUtils;
+
 import java.util.Objects;
 
 public class User {
     private String login;
     private String name;
     private String surname;
+    private String password;
+    private String salt;
 
     public User() {}
 
-    public User(String login, String name, String surname){
+    public User(String login, String name, String surname, String password, String salt) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.salt = salt;
+    }
+
+    public User(String login, String name, String surname, String password) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.salt = PasswordUtils.getSalt();
+        this.password = PasswordUtils.generateSecurePassword(password, salt);
+    }
+
+    public User(String login, String name, String surname) {
         this.login = login;
         this.name = name;
         this.surname = surname;
@@ -27,6 +47,10 @@ public class User {
         return login;
     }
 
+    public boolean verifyPassword(String passwordToCheck) {
+        return PasswordUtils.verifyUserPassword(passwordToCheck, password, salt);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,6 +59,14 @@ public class User {
         return login.equals(user.login) &&
                 name.equals(user.name) &&
                 surname.equals(user.surname);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 
     @Override
