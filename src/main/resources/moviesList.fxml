@@ -11,16 +11,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MoviesListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MoviesListController">
    <children>
       <VBox layoutX="250.0" layoutY="27.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="80.0" prefWidth="600.0">
                <children>
-                  <HBox layoutX="387.0" layoutY="7.0" spacing="10.0" AnchorPane.bottomAnchor="7.0" AnchorPane.topAnchor="7.0">
+                  <HBox layoutX="373.0" layoutY="7.0" spacing="10.0" AnchorPane.bottomAnchor="7.0" AnchorPane.topAnchor="7.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="34.0" text="Sortuj:" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="moviesOrder" onAction="#onSortByComparator" prefWidth="150.0" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="53.0" text="Sort:" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="moviesOrder" onAction="#onSortByComparator" prefHeight="26.0" prefWidth="161.0" />
                      </children>
                   </HBox>
                </children>
@@ -31,10 +31,10 @@
                   <Button fx:id="addMovie" layoutX="268.0" layoutY="79.0" mnemonicParsing="false" onAction="#addMovie" text="Add " />
                   <Button fx:id="removeMovie" layoutX="383.0" layoutY="79.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
                   <TextField fx:id="title" layoutX="63.0" layoutY="8.0" />
-                  <Text layoutX="22.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="title" />
-                  <Text layoutX="14.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="genre" />
+                  <Text layoutX="22.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" />
+                  <Text layoutX="14.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre" />
                   <DatePicker fx:id="date" layoutX="63.0" layoutY="44.0" />
-                  <Text layoutX="18.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
+                  <Text layoutX="18.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
                   <Button fx:id="home" layoutX="524.0" layoutY="78.0" mnemonicParsing="false" onAction="#home" text="Home" />
                   <ComboBox fx:id="genre" layoutX="62.0" layoutY="79.0" prefWidth="150.0" />
                </children>
