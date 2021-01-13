@@ -1,4 +1,4 @@
-package Validators;
+package validators;
 
 import model.User;
 
@@ -9,7 +9,7 @@ public class UserSurnameValidator implements IValidator<User>{
         String surname = user.getSurname();
 
         if(surname.length() < 1){
-            feedback.add("Surname must be at least 1 character long");
+            if(feedback != null) feedback.add("Surname must be at least 1 character long");
             return false;
         }
 

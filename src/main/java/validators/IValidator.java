@@ -1,6 +1,4 @@
-package Validators;
-
-import model.User;
+package validators;
 
 import java.util.List;
 
