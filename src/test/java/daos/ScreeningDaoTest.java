@@ -1,9 +1,6 @@
 package daos;
 
-import model.Hall;
-import model.Movie;
-import model.MovieType;
-import model.Screening;
+import model.*;
 import org.junit.jupiter.api.Test;
 import queryBuilders.QueryBuilder;
 import queryBuilders.screening.HallScreeningQueryBuilder;
@@ -17,7 +14,7 @@ class ScreeningDaoTest {
     private ScreeningDao dao = new ScreeningDao();
     Hall hall = new Hall(0, 30);
     Screening screening = new Screening(
-            new Movie("Titanic", LocalDate.of(1992, 02, 02), "komedia"),
+            new Movie("Titanic", LocalDate.of(1992, 02, 02), MovieGenre.KOMEDIA),
             MovieType.MOVIE_2D,
             LocalTime.of(14, 40),
             hall,
@@ -41,7 +38,7 @@ class ScreeningDaoTest {
         // given
         QueryBuilder builder = new HallScreeningQueryBuilder(hall);
         Screening newScreening = new Screening(
-                new Movie("Titanic2", LocalDate.of(1992, 02, 02), "komedia"),
+                new Movie("Titanic2", LocalDate.of(1992, 02, 02), MovieGenre.KOMEDIA),
                 MovieType.MOVIE_2D,
                 LocalTime.of(15, 20),
                 hall,

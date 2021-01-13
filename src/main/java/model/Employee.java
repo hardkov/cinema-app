@@ -28,5 +28,10 @@ public class Employee extends User {
     public int hashCode() {
         return Objects.hash(permissions);
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + String.format(" Permissions: %s", permissions.toString());
+    }
 }
 

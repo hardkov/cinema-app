@@ -28,6 +28,8 @@ import java.util.ResourceBundle;
 
 public class MoviesListController implements Initializable {
     private MovieDao movieDao = new MovieDao();
+    private SortedList moviesSortedList;
+    private ObservableList<Comparator<Movie>> moviesComparators;
 
     @FXML
     public TextField title;
@@ -43,9 +45,6 @@ public class MoviesListController implements Initializable {
 
     @FXML
     public ComboBox<Comparator<Movie>> moviesOrder;
-
-    private SortedList moviesSortedList;
-    private ObservableList<Comparator<Movie>> moviesComparators;
 
     public void initialize(URL url, ResourceBundle rb) {
         loadData();

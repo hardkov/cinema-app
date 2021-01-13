@@ -115,7 +115,7 @@ public class MovieDao {
         return movieGenericDao.updateField(moviePath, title, dateField, newDateString);
     }
 
-    public boolean updateMovieGenre(String title, String newGenre) {
+    public boolean updateMovieGenre(String title, MovieGenre newGenre) {
         return movieGenericDao.updateField(moviePath, title, genreField, newGenre);
     }
 }
