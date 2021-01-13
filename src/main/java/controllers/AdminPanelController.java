@@ -2,12 +2,30 @@ package controllers;
 
 import helpers.Redirect;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import model.User;
+import utils.Session;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AdminPanelController {
+public class AdminPanelController implements Initializable {
+    @FXML
+    public Label userWelcomeMessage;
+
+    public void initialize(URL url, ResourceBundle rb){
+        User currentUser = Session.getSession().getCurrentUser();
+        if(currentUser != null){
+            this.userWelcomeMessage.setText("Welcome, " + currentUser.getLogin());
+        }
+
+    }
+
     public void statistics(ActionEvent event) {
         System.out.println("Statistics button pressed");
     }
@@ -45,6 +63,7 @@ public class AdminPanelController {
 
     public void logout(ActionEvent event) {
         try{
+            Session.getSession().setCurrentUser(null);
             Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
             Redirect.redirectTo(pane, event);
         } catch (IOException e){
