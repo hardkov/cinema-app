@@ -7,7 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import model.User;
 import utils.PasswordUtils;
 import utils.Session;
@@ -17,6 +19,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LoginController {
+
+    @FXML
+    public Label actionInfo;
 
     @FXML
     private TextField username;
@@ -42,9 +47,8 @@ public class LoginController {
                 throw new RuntimeException(e);
             }
         } else{
-            
-            // Redirect to some error view
-            // Or password set view
+            actionInfo.setText("Wrong credentials! Please try again");
+            actionInfo.setTextFill(Color.RED);
         }
     }
 }

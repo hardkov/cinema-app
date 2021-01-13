@@ -63,6 +63,7 @@ public class AdminPanelController implements Initializable {
 
     public void logout(ActionEvent event) {
         try{
+            Session.getSession().setCurrentUser(null);
             Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
             Redirect.redirectTo(pane, event);
         } catch (IOException e){
