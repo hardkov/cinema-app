@@ -13,12 +13,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import model.Movie;
 import model.MovieGenre;
+import validators.MovieValidators;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +29,9 @@ public class MoviesListController implements Initializable {
     private MovieDao movieDao = new MovieDao();
     private SortedList moviesSortedList;
     private ObservableList<Comparator<Movie>> moviesComparators;
+
+    @FXML
+    public Label errorInfo;
 
     @FXML
     public TextField title;
@@ -56,6 +58,7 @@ public class MoviesListController implements Initializable {
         );
         moviesOrder.setItems(moviesComparators);
         moviesOrder.getSelectionModel().selectFirst();
+        genre.getSelectionModel().selectFirst();
     }
 
     public void home(ActionEvent event){
@@ -72,6 +75,7 @@ public class MoviesListController implements Initializable {
         ObservableList<Movie> observableList = FXCollections.observableList(list);
         moviesSortedList = observableList.sorted();
         moviesList.setItems(moviesSortedList);
+        errorInfo.setText("");
     }
 
     public void addMovie(ActionEvent event) {
@@ -81,8 +85,15 @@ public class MoviesListController implements Initializable {
                 genre.getValue()
         );
 
-        movieDao.addMovie(movie);
-        loadData();
+
+        MovieValidators movieValidators = new MovieValidators();
+        if(movieValidators.isValid(movie, null)){
+            movieDao.addMovie(movie);
+            loadData();
+        } else{
+            errorInfo.setText("Invalid movie details");
+            errorInfo.setTextFill(Color.RED);
+        }
     }
 
     public void removeMovie(ActionEvent event) {

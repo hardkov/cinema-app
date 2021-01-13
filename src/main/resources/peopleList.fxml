@@ -22,6 +22,7 @@
                         <ComboBox fx:id="employeeOrder" onAction="#onSortByComparator" prefHeight="26.0" prefWidth="161.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="errorInfo" layoutX="14.0" layoutY="12.0" />
                </children>
             </AnchorPane>
             <ListView fx:id="employeeList" prefHeight="247.0" prefWidth="600.0" />

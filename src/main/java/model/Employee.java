@@ -31,7 +31,7 @@ public class Employee extends User {
 
     @Override
     public String toString(){
-        return super.toString() + String.format(" Permissions: %s", permissions.toString());
+        return super.toString() + String.format(", Permissions: %s", permissions.toString());
     }
 }
 

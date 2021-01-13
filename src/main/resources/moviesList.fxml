@@ -23,6 +23,7 @@
                         <ComboBox fx:id="moviesOrder" onAction="#onSortByComparator" prefHeight="26.0" prefWidth="161.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="errorInfo" layoutX="14.0" layoutY="12.0" />
                </children>
             </AnchorPane>
             <ListView fx:id="moviesList" prefHeight="290.0" prefWidth="600.0" />

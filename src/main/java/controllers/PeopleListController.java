@@ -1,5 +1,6 @@
 package controllers;
 
+import validators.UserValidators;
 import comparators.LoginComparator;
 import comparators.NameComparator;
 import comparators.SurnameComparator;
@@ -14,11 +15,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import model.Employee;
 import model.Permission;
 
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +34,9 @@ public class PeopleListController implements Initializable {
     private EmployeeDao employeeDao = new EmployeeDao();
     private SortedList employeeSortedList;
     private ObservableList<Comparator<Employee>> employeeComparators;
+
+    @FXML
+    public Label errorInfo;
 
     @FXML
     public ComboBox<Permission> permissions;
@@ -60,6 +67,7 @@ public class PeopleListController implements Initializable {
 
         employeeOrder.setItems(employeeComparators);
         employeeOrder.getSelectionModel().selectFirst();
+        permissions.getSelectionModel().selectFirst();
     }
 
     public void home(ActionEvent event){
@@ -76,12 +84,22 @@ public class PeopleListController implements Initializable {
         ObservableList<Employee> observableList = FXCollections.observableList(list);
         employeeSortedList = observableList.sorted();
         employeeList.setItems(employeeSortedList);
+        errorInfo.setText("");
     }
 
     public void addPerson(ActionEvent event) {
-        Employee employee = new Employee(login.getText(), name.getText(), surname.getText(), permissions.getValue());
-        employeeDao.addEmployee(employee);
-        loadData();
+        Employee employee = (new Employee(login.getText(), name.getText(), surname.getText(), permissions.getValue()));
+        User user_employee = (User) employee;
+        System.out.println(employee);
+        UserValidators userValidators = new UserValidators();
+        if(userValidators.isValid(user_employee, null)){
+            employeeDao.addEmployee(employee);
+            loadData();
+        } else{
+            errorInfo.setText("Invalid user details");
+            errorInfo.setTextFill(Color.RED);
+        }
+
     }
 
     public void removePerson(ActionEvent event) {
