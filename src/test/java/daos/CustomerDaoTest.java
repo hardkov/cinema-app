@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerDaoTest {
     private CustomerDao dao= new CustomerDao();
-    private Customer customer = new Customer("krzhar", "Krzysztof", "Hardek", LocalDate.of(1998,4,22));
+    private Customer customer = new Customer("krzhar", "Krzysztof", "Hardek", "haslo", LocalDate.of(1998,4,22), "krzhar@gmail.com");
 
     @Test
     public void testAddingAndGettingFromDataBase() {
@@ -31,7 +31,7 @@ class CustomerDaoTest {
     @Test
     public void testAddingToDataBase() {
         // given
-        Customer newCustomer = new Customer("addaac","Ada", "Bera", LocalDate.of(1998, 3, 20));
+        Customer newCustomer = new Customer("addaac","Ada", "Bera", "haslo", LocalDate.of(1998, 3, 20), "adaber@gmail.com");
         dao.removeCustomer(newCustomer);
         int prevSize = dao.getAllCustomers().size();
         // when
@@ -44,7 +44,7 @@ class CustomerDaoTest {
     @Test
     public void testRemovingFromDatabase() {
         // given
-        Customer customerToRemove = new Customer("toRemove","Ada", "Bera", LocalDate.of(1998, 3, 20));
+        Customer customerToRemove = new Customer("toRemove","Ada", "Bera", "haslo", LocalDate.of(1998, 3, 20), "adber@gmail.com");
         dao.addCustomer(customerToRemove);
         // when
         dao.removeCustomer(customerToRemove);

@@ -28,10 +28,10 @@ public class AddingUserController {
 
     @FXML
     public void addUser(ActionEvent event) {
-        String login = name.getText().substring(0, 3) + lastname.getText().substring(0, 3);
-        Customer customer = new Customer(login ,name.getText(), lastname.getText(), birthDate.getValue());
-        CustomerDao customerDao = new CustomerDao();
-        customerDao.addCustomer(customer);
+//        String login = name.getText().substring(0, 3) + lastname.getText().substring(0, 3);
+//        Customer customer = new Customer(login ,name.getText(), lastname.getText(), birthDate.getValue());
+//        CustomerDao customerDao = new CustomerDao();
+//        customerDao.addCustomer(customer);
     }
 
 }

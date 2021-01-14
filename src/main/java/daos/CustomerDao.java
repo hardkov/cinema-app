@@ -20,6 +20,7 @@ public class CustomerDao {
     Firestore db;
     private final static String userField = "user";
     private final static String birthDateField = "dateOfBirth";
+    private final static String emailField = "e-mail";
 
     public CustomerDao() {
         this.db = FirestoreDatabase.getInstance().getDb();
@@ -36,7 +37,7 @@ public class CustomerDao {
         }
         // creating user
         UserDao userDao = new UserDao();
-        User user = new User(customer.getLogin(), customer.getName(), customer.getSurname());
+        User user = new User(customer.getLogin(), customer.getName(), customer.getSurname(), customer.getPassword(), customer.getSalt());
         // user with such login not exist or creating user failed
         if (!userDao.addUser(user)) {
             return false;
@@ -46,6 +47,7 @@ public class CustomerDao {
         docData.put(userField, userReference);
         String dateString = new DateConverter().getDateString(customer.getDateOfBirth());
         docData.put(birthDateField, dateString);
+        docData.put(emailField, customer.getEmail());
         ApiFuture<WriteResult> writeResult = db.collection(customerPath).document(login).set(docData);
         try {
             writeResult.get();
@@ -65,7 +67,8 @@ public class CustomerDao {
                 LocalDate customerBirthDate = new DateConverter().getLocalDateFromString(document.get(birthDateField, String.class));
                 DocumentReference userReference = document.get(userField, DocumentReference.class);
                 User user = new GenericDao<User>(User.class).getObject(userReference);
-                customer = new Customer(user.getLogin(), user.getName(), user.getSurname(), customerBirthDate);
+                String email = document.get(emailField, String.class);
+                customer = new Customer(user.getLogin(), user.getName(), user.getSurname(), user.getPassword(), customerBirthDate, email);
             }
             else {
                 System.out.println(String.format("There is no document %s", docRef.getPath()));
@@ -91,7 +94,8 @@ public class CustomerDao {
                 LocalDate customerBirthDate = new DateConverter().getLocalDateFromString(document.get(birthDateField, String.class));
                 DocumentReference userReference = document.get(userField, DocumentReference.class);
                 User user = userGenericDao.getObject(userReference);
-                Customer customer = new Customer(user.getLogin(), user.getName(), user.getSurname(), customerBirthDate);
+                String email = document.get(emailField, String.class);
+                Customer customer = new Customer(user.getLogin(), user.getName(), user.getSurname(), user.getPassword(), customerBirthDate, email);
                 customers.add(customer);
             }
         } catch (InterruptedException | ExecutionException e) {
