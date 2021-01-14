@@ -17,6 +17,7 @@ class ScreeningDaoTest {
             new Movie("Titanic", LocalDate.of(1992, 02, 02), MovieGenre.COMEDY),
             MovieType.MOVIE_2D,
             LocalTime.of(14, 40),
+            LocalDate.of(2021, 01, 10),
             hall,
             30,
             14.0f
@@ -41,6 +42,7 @@ class ScreeningDaoTest {
                 new Movie("Titanic2", LocalDate.of(1992, 02, 02), MovieGenre.COMEDY),
                 MovieType.MOVIE_2D,
                 LocalTime.of(15, 20),
+                LocalDate.of(2021, 01, 11),
                 hall,
                 30,
                 14.0f

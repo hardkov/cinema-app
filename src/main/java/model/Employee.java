@@ -7,12 +7,12 @@ public class Employee extends User {
 
     public Employee() {}
 
-    public Employee(String login, String name, String surname, String password, Permission permissions){
+    public Employee(String login, String name, String surname, String password, Permission permissions) {
         super(login, name, surname, password);
         this.permissions = permissions;
     }
 
-    public Employee(String login, String name, String surname, String password, String salt, Permission permissions){
+    public Employee(String login, String name, String surname, String password, String salt, Permission permissions) {
         super(login, name, surname, password, salt);
         this.permissions = permissions;
     }

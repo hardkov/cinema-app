@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -8,23 +9,25 @@ public class Screening {
     private Movie movie;
     private MovieType movieType;
     private LocalTime time;
+    private LocalDate date;
     private Hall hall;
     private int seatsLimit;
     private float basePrice;
 
     public Screening() { }
 
-    public Screening(Movie movie, MovieType movieType, LocalTime time, Hall hall, int seatsLimit, float basePrice) {
+    public Screening(Movie movie, MovieType movieType, LocalTime time, LocalDate date, Hall hall, int seatsLimit, float basePrice) {
         this.movie = movie;
         this.movieType = movieType;
         this.time = time;
+        this.date = date;
         this.hall = hall;
         this.seatsLimit = seatsLimit;
         this.basePrice = basePrice;
     }
 
-    public Screening(String id, Movie movie, MovieType movieType, LocalTime time, Hall hall, int seatsLimit, float basePrice) {
-        this(movie, movieType, time, hall, seatsLimit, basePrice);
+    public Screening(String id, Movie movie, MovieType movieType, LocalTime time, LocalDate date, Hall hall, int seatsLimit, float basePrice) {
+        this(movie, movieType, time, date, hall, seatsLimit, basePrice);
         this.id = id;
     }
 
@@ -38,6 +41,10 @@ public class Screening {
 
     public LocalTime getTime() {
         return time;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     public Hall getHall() {

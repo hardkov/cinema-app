@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeDaoTest {
     private EmployeeDao dao = new EmployeeDao();
-    Employee employee = new Employee("gsalnin", "Grzegorz", "Janisz", Permission.WORKER);
+    Employee employee = new Employee("gsalnin", "Grzegorz", "Janisz", null, Permission.WORKER);
 
     @Test
     public void testAddingAndGettingFromDataBase() {
@@ -29,7 +29,7 @@ class EmployeeDaoTest {
     @Test
     public void testAddingToDataBase() {
         // given
-        Employee newEmployee = new Employee("newone", "Adrian", "Norka", Permission.WORKER);
+        Employee newEmployee = new Employee("newone", "Adrian", "Norka", null, Permission.WORKER);
         dao.removeEmployee(newEmployee);
         int prevSize = dao.getAllEmployees().size();
         // when
@@ -42,7 +42,7 @@ class EmployeeDaoTest {
     @Test
     public void testRemovingFromDatabase() {
         // given
-        Employee employeeToRemove = new Employee("newone2", "Adrian", "Norka", Permission.ADMIN);
+        Employee employeeToRemove = new Employee("newone2", "Adrian", "Norka", null, Permission.ADMIN);
         dao.addEmployee(employeeToRemove);
         // when
         dao.removeEmployee(employeeToRemove);

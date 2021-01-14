@@ -9,6 +9,7 @@ import model.Movie;
 import model.MovieType;
 import model.Screening;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class ScreeningDao {
     public static final String moveField = "movie";
     public static final String typeField = "type";
     public static final String timeField = "time";
+    public static final String dateField = "date";
     public static final String hallField = "hall";
     public static final String seatsLimitField = "seatsLimit";
     public static final String basePriceField = "basePrice";
@@ -61,8 +63,11 @@ public class ScreeningDao {
         }
         docData.put(moveField, movieReference);
         docData.put(typeField, screening.getMovieType());
-        String timeString = new DateConverter().getTimeString(screening.getTime());
+        DateConverter dc = new DateConverter();
+        String timeString = dc.getTimeString(screening.getTime());
         docData.put(timeField, timeString);
+        String dateString = dc.getDateString(screening.getDate());
+        docData.put(dateField, dateString);
         HallDao hallDao = new HallDao();
         DocumentReference hallReference = hallDao.getHallReference(screening.getHall());
         if (!hallDao.doesHallExist(Integer.parseInt(hallReference.getId()))) {
@@ -133,14 +138,17 @@ public class ScreeningDao {
         DocumentReference movieReference = document.get(moveField, DocumentReference.class);
         Movie movie = movieDao.getMovie(movieReference.getId());
         MovieType movieType = document.get(typeField, MovieType.class);
+        DateConverter dc = new DateConverter();
         String timeString = document.get(timeField, String.class);
-        LocalTime time = new DateConverter().getLocalTimeFromString(timeString);
+        LocalTime time = dc.getLocalTimeFromString(timeString);
+        String dateString = document.get(dateField, String.class);
+        LocalDate date = dc.getLocalDateFromString(dateString);
         DocumentReference hallReference = document.get(hallField, DocumentReference.class);
         int hallId = Integer.parseInt(hallReference.getId());
         Hall hall = hallDao.getHall(hallId);
         int seatsLimit = document.get(seatsLimitField, Integer.class);
         float basePrice = document.get(basePriceField, Float.class);
-        return new Screening(id, movie, movieType, time, hall, seatsLimit, basePrice);
+        return new Screening(id, movie, movieType, time, date, hall, seatsLimit, basePrice);
     }
 
     public boolean removeScreening(Screening screening) {
