@@ -1,10 +1,10 @@
 package model;
 
 public enum MovieGenre {
-    DRAMAT,
-    KOMEDIA,
-    KOMEDIODRAMAT,
-    SENSACJA;
+    DRAMA,
+    COMEDY,
+    COMEDYDRAMA,
+    THRILLER;
 
     @Override
     public String toString() {

@@ -1,10 +1,7 @@
 package daos;
 
-import helpers.DateConverter;
-import model.Employee;
 import model.Movie;
 import model.MovieGenre;
-import model.Permission;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -13,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MovieDaoTest {
     private MovieDao dao = new MovieDao();
-    Movie movie = new Movie("Titanic", LocalDate.of(1998,4,2), MovieGenre.DRAMAT);
+    Movie movie = new Movie("Titanic", LocalDate.of(1998,4,2), MovieGenre.DRAMA);
 
     @Test
     public void testAddingAndGettingFromDataBase() {
@@ -32,7 +29,7 @@ class MovieDaoTest {
     @Test
     public void testAddingToDataBase() {
         // given
-        Movie newMovie = new Movie("Titanic2", LocalDate.of(1998,4,2), MovieGenre.DRAMAT);
+        Movie newMovie = new Movie("Titanic2", LocalDate.of(1998,4,2), MovieGenre.DRAMA);
         dao.removeMovie(newMovie);
         int prevSize = dao.getAllMovies().size();
         // when
@@ -45,7 +42,7 @@ class MovieDaoTest {
     @Test
     public void testRemovingFromDatabase() {
         // given
-        Movie movieToRemove = new Movie("Titanic3", LocalDate.of(1998,4,2), MovieGenre.DRAMAT);
+        Movie movieToRemove = new Movie("Titanic3", LocalDate.of(1998,4,2), MovieGenre.DRAMA);
         dao.addMovie(movieToRemove);
         // when
         dao.removeMovie(movieToRemove);
@@ -56,7 +53,7 @@ class MovieDaoTest {
     @Test
     public void testUpdatingMovieGenre() {
         // given
-        MovieGenre newGenre = MovieGenre.KOMEDIA;
+        MovieGenre newGenre = MovieGenre.COMEDY;
         // when
         dao.updateMovieGenre(movie.getTitle(), newGenre);
         // then

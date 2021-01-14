@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import model.*;
 
-import javax.annotation.Resource;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,8 +27,8 @@ public class ScreeningsListController implements Initializable {
 
     private void loadData(){
         list.removeAll(list);
-        Movie movie1 = new Movie("Movie1", LocalDate.of(1999, 9, 12), MovieGenre.DRAMAT);
-        Movie movie2 = new Movie("Movie2", LocalDate.of(1998, 9, 12), MovieGenre.KOMEDIA);
+        Movie movie1 = new Movie("Movie1", LocalDate.of(1999, 9, 12), MovieGenre.DRAMA);
+        Movie movie2 = new Movie("Movie2", LocalDate.of(1998, 9, 12), MovieGenre.COMEDY);
         MovieType movieType = MovieType.MOVIE_2D;
         Hall hall = new Hall(1, 20);
         int seatsLimit = 15;
