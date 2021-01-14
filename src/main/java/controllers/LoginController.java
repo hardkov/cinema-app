@@ -28,9 +28,13 @@ public class LoginController {
     public void login(ActionEvent event) {
         String login = username.getText();
         String pass = password.getText();
+        User user = null;
 
-        UserDao userDao = new UserDao();
-        User user = userDao.getUser(login);
+        try {
+            UserDao userDao = new UserDao();
+            user = userDao.getUser(login);
+        } catch (Exception e){
+        }
 
         if (user != null && user.verifyPassword(pass)) {
 

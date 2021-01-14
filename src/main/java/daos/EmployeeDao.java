@@ -64,7 +64,8 @@ public class EmployeeDao {
                 DocumentReference userReference = document.get(userField, DocumentReference.class);
                 GenericDao<User> genericDao = new GenericDao<>(User.class);
                 User user = genericDao.getObject(userReference);
-                return new Employee(user.getLogin(), user.getName(), user.getSurname(), permission);
+                return new Employee(user.getLogin(), user.getName(), user.getSurname(), user.getPassword(),
+                        user.getSalt(), permission);
             }
             else {
                 System.out.println(String.format("There is no document %s", docRef.getPath()));
@@ -87,7 +88,7 @@ public class EmployeeDao {
                 Permission permission = document.get(permissionsField, Permission.class);
                 DocumentReference userReference = document.get(userField, DocumentReference.class);
                 User user = userGenericDao.getObject(userReference);
-                Employee employee = new Employee(user.getLogin(), user.getName(), user.getSurname(), permission);
+                Employee employee = new Employee(user.getLogin(), user.getName(), user.getSurname(), user.getPassword(), user.getSalt(), permission);
                 employees.add(employee);
             }
         } catch (InterruptedException | ExecutionException e) {

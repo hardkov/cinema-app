@@ -1,5 +1,7 @@
 package utils;
 
+import org.apache.http.io.SessionOutputBuffer;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
@@ -52,11 +54,13 @@ public class PasswordUtils {
         boolean returnValue = false;
 
         // Generate New secure password with the same salt
-        String newSecurePassword = generateSecurePassword(providedPassword, salt);
+        if(providedPassword != null && salt != null ){
+            String newSecurePassword = generateSecurePassword(providedPassword, salt);
 
-        // Check if two passwords are equal
-        returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
+            // Check if two passwords are equal
+            returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
 
+        }
         return returnValue;
     }
 }

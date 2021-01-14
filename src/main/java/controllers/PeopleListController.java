@@ -88,7 +88,8 @@ public class PeopleListController implements Initializable {
     }
 
     public void addPerson(ActionEvent event) {
-        Employee employee = (new Employee(login.getText(), name.getText(), surname.getText(), permissions.getValue()));
+        Employee employee = (new Employee(login.getText(), name.getText(), surname.getText(), null, null,
+                permissions.getValue()));
         User user_employee = (User) employee;
         System.out.println(employee);
         UserValidators userValidators = new UserValidators();
@@ -99,7 +100,6 @@ public class PeopleListController implements Initializable {
             errorInfo.setText("Invalid user details");
             errorInfo.setTextFill(Color.RED);
         }
-
     }
 
     public void removePerson(ActionEvent event) {
