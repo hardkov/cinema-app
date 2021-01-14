@@ -69,6 +69,14 @@ public class User {
         return salt;
     }
 
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public void setSalt(String salt){
+        this.salt = salt;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(login, name, surname);

@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import model.Employee;
+import model.Permission;
 import model.User;
 import utils.Session;
 
@@ -36,10 +38,25 @@ public class LoginController {
         } catch (Exception e){
         }
 
-        if (user != null && user.verifyPassword(pass)) {
-            Redirect.redirectTo(cls, event, "adminPanel.fxml");
+        if (user != null) {
             Session.getSession().setCurrentUser(user);
 
+            if(user.getPassword() == null){
+                Redirect.redirectTo(cls, event, "setEmployeePassword.fxml");
+            } else if(user.verifyPassword(pass)){
+                if(user instanceof Employee){
+                    if(((Employee) user).getPermissions() == Permission.ADMIN){
+                        Redirect.redirectTo(cls, event, "adminPanel.fxml");
+                    } else{
+                        Redirect.redirectTo(cls, event, "employeePanel.fxml");
+                    }
+                } else{
+                    Redirect.redirectTo(cls, event, "userPanel.fxml");
+                }
+            } else {
+                actionInfo.setText("Wrong credentials! Please try again");
+                actionInfo.setTextFill(Color.RED);
+            }
         } else{
             actionInfo.setText("Wrong credentials! Please try again");
             actionInfo.setTextFill(Color.RED);
