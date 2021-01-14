@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MoviesListController implements Initializable {
+    private Class cls = getClass();
     private MovieDao movieDao = new MovieDao();
     private SortedList moviesSortedList;
     private ObservableList<Comparator<Movie>> moviesComparators;
@@ -62,13 +63,9 @@ public class MoviesListController implements Initializable {
     }
 
     public void home(ActionEvent event){
-        try{
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("adminPanel.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        Redirect.redirectTo(cls, event, "adminPanel.fxml");
     }
+
 
     private void loadData(){
         List<Movie> list = movieDao.getAllMovies();

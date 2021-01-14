@@ -14,7 +14,7 @@ import utils.Session;
 import java.io.IOException;
 
 public class LoginController {
-
+    private Class cls = getClass();
     @FXML
     public Label actionInfo;
 
@@ -37,14 +37,9 @@ public class LoginController {
         }
 
         if (user != null && user.verifyPassword(pass)) {
-
+            Redirect.redirectTo(cls, event, "adminPanel.fxml");
             Session.getSession().setCurrentUser(user);
-            try{
-                Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("adminPanel.fxml"));
-                Redirect.redirectTo(pane, event);
-            } catch (IOException e){
-                throw new RuntimeException(e);
-            }
+
         } else{
             actionInfo.setText("Wrong credentials! Please try again");
             actionInfo.setTextFill(Color.RED);

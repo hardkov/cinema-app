@@ -24,6 +24,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HallsListController implements Initializable {
+    private Class cls = getClass();
     private HallDao hallDao = new HallDao();
 
     @FXML
@@ -44,12 +45,7 @@ public class HallsListController implements Initializable {
     }
 
     public void home(ActionEvent event){
-        try{
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("adminPanel.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        Redirect.redirectTo(cls, event, "adminPanel.fxml");
     }
 
     private void loadData(){

@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class PeopleListController implements Initializable {
+    private Class cls = getClass();
     private EmployeeDao employeeDao = new EmployeeDao();
     private SortedList employeeSortedList;
     private ObservableList<Comparator<Employee>> employeeComparators;
@@ -71,12 +72,7 @@ public class PeopleListController implements Initializable {
     }
 
     public void home(ActionEvent event){
-        try{
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("adminPanel.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        Redirect.redirectTo(cls, event, "adminPanel.fxml");
     }
 
     private void loadData(){

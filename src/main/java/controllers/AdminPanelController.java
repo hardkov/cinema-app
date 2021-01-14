@@ -15,6 +15,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminPanelController implements Initializable {
+    private Class cls = getClass();
+
     @FXML
     public Label userWelcomeMessage;
 
@@ -31,30 +33,15 @@ public class AdminPanelController implements Initializable {
     }
 
     public void people(ActionEvent event) {
-        try{
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("peopleList.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        Redirect.redirectTo(cls, event, "peopleList.fxml");
     }
 
     public void halls(ActionEvent event) {
-        try{
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("hallsList.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        Redirect.redirectTo(cls, event, "hallsList.fxml");
     }
 
     public void movies(ActionEvent event) {
-        try{
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("moviesList.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        Redirect.redirectTo(cls, event, "moviesList.fxml");
     }
 
     public void discounts(ActionEvent event) {
@@ -62,12 +49,6 @@ public class AdminPanelController implements Initializable {
     }
 
     public void logout(ActionEvent event) {
-        try{
-            Session.getSession().setCurrentUser(null);
-            Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
-            Redirect.redirectTo(pane, event);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        Redirect.redirectTo(cls, event, "login.fxml");
     }
 }
