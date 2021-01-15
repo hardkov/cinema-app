@@ -2,7 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 
-public class WorkerController {
+public class WorkerPanelController {
 
     public void screenings(ActionEvent event) {
         System.out.println("Screenings button pressed");
