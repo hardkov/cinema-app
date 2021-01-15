@@ -87,7 +87,7 @@ public class PeopleListController implements Initializable {
         Employee employee = (new Employee(login.getText(), name.getText(), surname.getText(), null, null,
                 permissions.getValue()));
         User user_employee = (User) employee;
-        System.out.println(employee);
+
         UserValidators userValidators = new UserValidators();
         if(userValidators.isValid(user_employee, null)){
             employeeDao.addEmployee(employee);

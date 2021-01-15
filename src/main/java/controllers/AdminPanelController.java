@@ -49,6 +49,7 @@ public class AdminPanelController implements Initializable {
     }
 
     public void logout(ActionEvent event) {
+        Session.getSession().setCurrentUser(null);
         Redirect.redirectTo(cls, event, "login.fxml");
     }
 }

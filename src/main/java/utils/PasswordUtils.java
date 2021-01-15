@@ -1,5 +1,8 @@
 package utils;
 
+import model.Employee;
+import model.Permission;
+import model.User;
 import org.apache.http.io.SessionOutputBuffer;
 
 import javax.crypto.SecretKeyFactory;
@@ -63,4 +66,12 @@ public class PasswordUtils {
         }
         return returnValue;
     }
+
+    public static Permission authorize(User user){
+        if(user instanceof Employee){
+            return ((Employee) user).getPermissions();
+        }
+        return null;
+    }
+
 }
