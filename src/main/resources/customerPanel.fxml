@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerPanelController">
+   <children>
+      <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+         <children>
+            <Button fx:id="movies" mnemonicParsing="false" onAction="#movies" prefHeight="26.0" prefWidth="95.0" text="Movies" />
+            <Button fx:id="screenings" mnemonicParsing="false" onAction="#screenings" prefHeight="26.0" prefWidth="95.0" text="Screenings" />
+            <Button fx:id="tickets" mnemonicParsing="false" onAction="#tickets" prefHeight="26.0" prefWidth="95.0" text="Tickets" textAlignment="CENTER" />
+            <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="94.0" text="Logout" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

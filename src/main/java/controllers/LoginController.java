@@ -49,8 +49,7 @@ public class LoginController {
             } else if(permission == Permission.WORKER) {
                 Redirect.redirectTo(cls, event, "workerPanel.fxml");
             } else{
-                // temporary
-                System.out.println("CUstomer");
+                Redirect.redirectTo(cls, event, "customerPanel.fxml");
             }
 
             return true;
