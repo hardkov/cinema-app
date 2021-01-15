@@ -6,16 +6,22 @@ import java.util.Objects;
 
 public class Customer extends User {
     private LocalDate dateOfBirth;
+    private String email;
 
     public Customer() {}
 
-    public Customer(String login, String name, String surname, LocalDate dateOfBirth){
-        super(login, name, surname);
+    public Customer(String login, String name, String surname, String password, LocalDate dateOfBirth, String email){
+        super(login, name, surname, password);
         this.dateOfBirth = dateOfBirth;
+        this.email = email;
     }
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override

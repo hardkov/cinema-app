@@ -34,8 +34,8 @@ public class ScreeningsListController implements Initializable {
         int seatsLimit = 15;
         float basePrice = 15;
 
-        Screening screening1 = new Screening(movie1, movieType, LocalTime.of(15, 20), hall, seatsLimit, basePrice);
-        Screening screening2 = new Screening(movie2, movieType, LocalTime.of(17, 30), hall, seatsLimit, basePrice);
+        Screening screening1 = new Screening(movie1, movieType, LocalTime.of(15, 20), LocalDate.of(2021, 01, 10), hall, seatsLimit, basePrice);
+        Screening screening2 = new Screening(movie2, movieType, LocalTime.of(17, 30), LocalDate.of(2021, 01, 5), hall, seatsLimit, basePrice);
         screeningsList.getItems().addAll(screening1, screening2);
     }
 
