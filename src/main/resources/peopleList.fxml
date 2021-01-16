@@ -19,13 +19,13 @@
                   <HBox layoutX="373.0" layoutY="7.0" spacing="10.0" AnchorPane.bottomAnchor="7.0" AnchorPane.topAnchor="7.0">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="53.0" text="Sort:" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="employeeOrder" onAction="#onSortByComparator" prefHeight="26.0" prefWidth="161.0" />
+                        <ComboBox fx:id="userOrder" onAction="#onSortByComparator" prefHeight="26.0" prefWidth="161.0" />
                      </children>
                   </HBox>
                   <Label fx:id="errorInfo" layoutX="14.0" layoutY="12.0" />
                </children>
             </AnchorPane>
-            <ListView fx:id="employeeList" prefHeight="247.0" prefWidth="600.0" />
+            <ListView fx:id="userList" prefHeight="247.0" prefWidth="600.0" />
             <AnchorPane prefHeight="143.0" prefWidth="600.0">
                <children>
                   <TextField fx:id="login" layoutX="84.0" layoutY="14.0" />

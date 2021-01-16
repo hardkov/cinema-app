@@ -84,6 +84,32 @@ public class CustomerDao {
         return db.collection(customerPath).document(customer.getLogin());
     }
 
+    public boolean removeALlCustomers(){
+        boolean removeResult = true;
+        ApiFuture<QuerySnapshot> future = db.collection(customerPath).get();
+        List<QueryDocumentSnapshot> documents = null;
+        try {
+            documents = future.get().getDocuments();
+            GenericDao<User> userGenericDao = new GenericDao<>(User.class);
+            for (QueryDocumentSnapshot document : documents) {
+                DocumentReference userReference = document.get(userField, DocumentReference.class);
+                removeResult &= userGenericDao.removeObject(userReference);
+
+                DocumentReference customerReference = document.getReference();
+
+                ApiFuture<WriteResult> customerRemoveResult = customerReference.delete();;
+
+                customerRemoveResult.get();
+
+                removeResult |= customerRemoveResult.isDone();
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return removeResult;
+    }
+
     public List<Customer> getAllCustomers() {
         ApiFuture<QuerySnapshot> future = db.collection(customerPath).get();
         List<QueryDocumentSnapshot> documents = null;
@@ -96,7 +122,7 @@ public class CustomerDao {
                 DocumentReference userReference = document.get(userField, DocumentReference.class);
                 User user = userGenericDao.getObject(userReference);
                 String email = document.get(emailField, String.class);
-                Customer customer = new Customer(user.getLogin(), user.getName(), user.getSurname(), user.getPassword(), customerBirthDate, email);
+                Customer customer = new Customer(user.getLogin(), user.getName(), user.getSurname(), user.getPassword(), user.getSalt(), customerBirthDate, email);
                 customers.add(customer);
             }
         } catch (InterruptedException | ExecutionException e) {

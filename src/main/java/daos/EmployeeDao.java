@@ -28,6 +28,32 @@ public class EmployeeDao {
         return addEmployee(employee, true);
     }
 
+    public boolean removeALlEmployee(){
+        boolean removeResult = true;
+        ApiFuture<QuerySnapshot> future = db.collection(employeePath).get();
+        List<QueryDocumentSnapshot> documents = null;
+        try {
+            documents = future.get().getDocuments();
+            GenericDao<User> userGenericDao = new GenericDao<>(User.class);
+            for (QueryDocumentSnapshot document : documents) {
+                DocumentReference userReference = document.get(userField, DocumentReference.class);
+                removeResult &= userGenericDao.removeObject(userReference);
+
+                DocumentReference employeeReference = document.getReference();
+
+                ApiFuture<WriteResult> employeeRemoveResult = employeeReference.delete();;
+
+                employeeRemoveResult.get();
+
+                removeResult |= employeeRemoveResult.isDone();
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return removeResult;
+    }
+
     private boolean addEmployee(Employee employee, boolean checkIfExists) {
         String login = employee.getLogin();
         if (checkIfExists && doesEmployeeExist(login)) {
@@ -35,7 +61,8 @@ public class EmployeeDao {
         }
         // creating user
         UserDao userDao = new UserDao();
-        User user = new User(employee.getLogin(), employee.getName(), employee.getSurname());
+        User user = new User(employee.getLogin(), employee.getName(), employee.getSurname(),
+                employee.getPassword(), employee.getSalt());
         // user with such login not exist or creating user failed
         if (!userDao.addUser(user)) {
             return false;

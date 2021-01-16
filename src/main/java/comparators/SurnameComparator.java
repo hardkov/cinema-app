@@ -5,8 +5,8 @@ import model.User;
 
 import java.util.Comparator;
 
-public class SurnameComparator implements Comparator<Employee> {
-    public int compare(Employee o1, Employee o2){
+public class SurnameComparator implements Comparator<User> {
+    public int compare(User o1, User o2){
         if(o1 != null && o2 != null){
             return o1.getSurname().compareTo(o2.getSurname());
         }

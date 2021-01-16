@@ -5,9 +5,9 @@ import model.User;
 
 import java.util.Comparator;
 
-public class LoginComparator implements Comparator<Employee> {
+public class LoginComparator implements Comparator<User> {
     @Override
-    public int compare(Employee o1, Employee o2){
+    public int compare(User o1, User o2){
         if(o1 != null && o2 != null){
             return o1.getLogin().compareTo(o2.getLogin());
         }

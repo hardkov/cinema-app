@@ -75,10 +75,8 @@ public class LoginController {
         } catch (Exception e){
         }
 
-        System.out.println(customer);
-
         User user = employee != null ? employee : customer;
-        System.out.println(user);
+
         if (user == null || !handleUserAuth(user, pass, event)) {
             actionInfo.setText("Wrong credentials! Please try again");
             actionInfo.setTextFill(Color.RED);
