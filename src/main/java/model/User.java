@@ -28,13 +28,7 @@ public class User {
         this.salt = PasswordUtils.getSalt();
         this.password = PasswordUtils.generateSecurePassword(password, salt);
     }
-
-    public User(String login, String name, String surname) {
-        this.login = login;
-        this.name = name;
-        this.surname = surname;
-    }
-
+    
     public String getName() {
         return name;
     }
