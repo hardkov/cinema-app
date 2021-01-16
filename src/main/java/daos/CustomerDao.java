@@ -68,7 +68,8 @@ public class CustomerDao {
                 DocumentReference userReference = document.get(userField, DocumentReference.class);
                 User user = new GenericDao<User>(User.class).getObject(userReference);
                 String email = document.get(emailField, String.class);
-                customer = new Customer(user.getLogin(), user.getName(), user.getSurname(), user.getPassword(), customerBirthDate, email);
+                customer = new Customer(user.getLogin(), user.getName(), user.getSurname(), user.getPassword(), user.getSalt(),
+                        customerBirthDate, email);
             }
             else {
                 System.out.println(String.format("There is no document %s", docRef.getPath()));

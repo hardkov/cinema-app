@@ -5,6 +5,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
@@ -17,5 +18,7 @@
          </children>
       </AnchorPane>
       <Label layoutX="198.0" layoutY="29.0" prefHeight="16.0" prefWidth="205.0" text="Welcome to Cinema Multiplex!" />
+      <Button fx:id="register" layoutX="507.0" layoutY="334.0" mnemonicParsing="false" onAction="#register" text="Register" />
+      <Text layoutX="425.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?" />
    </children>
 </AnchorPane>

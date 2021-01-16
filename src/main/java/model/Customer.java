@@ -15,6 +15,11 @@ public class Customer extends User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
     }
+    public Customer(String login, String name, String surname, String password, String salt, LocalDate dateOfBirth, String email){
+        super(login, name, surname, password, salt);
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+    }
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;

@@ -67,15 +67,25 @@ public class LoginController {
 
         try {
             employee = employeeDao.getEmployee(login);
+        } catch (Exception e){
+        }
+
+        try {
             customer = customerDao.getCustomer(login);
         } catch (Exception e){
         }
 
-        User user = employee != null ? employee : customer;
+        System.out.println(customer);
 
+        User user = employee != null ? employee : customer;
+        System.out.println(user);
         if (user == null || !handleUserAuth(user, pass, event)) {
             actionInfo.setText("Wrong credentials! Please try again");
             actionInfo.setTextFill(Color.RED);
         }
+    }
+
+    public void register(ActionEvent event) {
+        Redirect.redirectTo(cls, event, "register.fxml");
     }
 }
