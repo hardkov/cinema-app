@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -14,5 +15,6 @@
             <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="94.0" text="Logout" />
          </children>
       </VBox>
+      <Label fx:id="userWelcomeMessage" layoutX="14.0" layoutY="14.0" text="Welcome, " />
    </children>
 </AnchorPane>
