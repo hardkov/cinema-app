@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerMoviesListController">
+   <children>
+      <VBox layoutX="250.0" layoutY="27.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="80.0" prefWidth="600.0">
+               <children>
+                  <HBox layoutX="373.0" layoutY="7.0" spacing="10.0" AnchorPane.bottomAnchor="7.0" AnchorPane.topAnchor="7.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="53.0" text="Sort:" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="moviesOrder" onAction="#onSortByComparator" prefHeight="26.0" prefWidth="161.0" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="errorInfo" layoutX="14.0" layoutY="12.0" />
+               </children>
+            </AnchorPane>
+            <ListView fx:id="moviesList" prefHeight="290.0" prefWidth="600.0" />
+            <AnchorPane prefHeight="150.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="screenings" layoutX="255.0" layoutY="55.0" mnemonicParsing="false" onAction="#screenings" text="Screenings" />
+                  <Button fx:id="home" layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#home" text="Home" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

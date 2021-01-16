@@ -23,6 +23,6 @@ public class CustomerPanelController {
     }
 
     public void movies(ActionEvent event) {
-        System.out.println("Movies button pressed");
+        Redirect.redirectTo(cls, event, "customerMoviesList.fxml");
     }
 }
