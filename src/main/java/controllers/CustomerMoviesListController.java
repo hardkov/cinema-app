@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import model.Movie;
 import model.MovieGenre;
+import utils.Session;
 import validators.MovieValidators;
 
 import java.net.URL;
@@ -63,6 +64,8 @@ public class CustomerMoviesListController implements Initializable {
     }
 
     public void screenings(ActionEvent event) {
-        System.out.println("Screenings button pressed");
+        Movie selectedMovie = moviesList.getSelectionModel().getSelectedItem();
+        Session.getSession().setCurrentlyViewedMovie(selectedMovie);
+        Redirect.redirectTo(cls, event, "customerScreeningsList.fxml");
     }
 }

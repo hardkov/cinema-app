@@ -1,7 +1,5 @@
 package controllers;
-import daos.CustomerDao;
-import daos.EmployeeDao;
-import daos.UserDao;
+import daos.*;
 import helpers.Redirect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,15 +8,15 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import model.Customer;
-import model.Employee;
-import model.Permission;
-import model.User;
+import model.*;
 import utils.PasswordUtils;
 import utils.Session;
 
 import java.io.IOException;
 import java.security.Permissions;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 public class LoginController {
     private Class cls = getClass();

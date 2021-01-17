@@ -36,7 +36,7 @@ public class CustomerPanelController implements Initializable {
     }
 
     public void screenings(ActionEvent event) {
-        System.out.println("Screenings button pressed");
+        Redirect.redirectTo(cls, event, "customerScreeningsList.fxml");
     }
 
     public void movies(ActionEvent event) {
