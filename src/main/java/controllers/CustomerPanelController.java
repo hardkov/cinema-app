@@ -1,5 +1,6 @@
 package controllers;
 
+import daos.TicketDao;
 import helpers.Redirect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,9 @@ public class CustomerPanelController implements Initializable {
     public Label userWelcomeMessage;
 
     public void initialize(URL url, ResourceBundle rb){
+        TicketDao ticketDao = new TicketDao();
+        System.out.println(ticketDao.getAllTickets());
+
         User currentUser = Session.getSession().getCurrentUser();
         if(currentUser != null){
             this.userWelcomeMessage.setText("Welcome, " + currentUser.getLogin());

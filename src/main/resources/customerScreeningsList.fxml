@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerScreeningsListController">
    <children>
@@ -28,6 +29,8 @@
                <children>
                   <Button fx:id="buyTicket" layoutX="264.0" layoutY="55.0" mnemonicParsing="false" onAction="#buyTicket" text="Buy ticket" />
                   <Button fx:id="home" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#home" text="Home" />
+                  <ComboBox fx:id="discount" layoutX="436.0" layoutY="14.0" prefWidth="150.0" />
+                  <Text layoutX="366.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount:" />
                </children>
             </AnchorPane>
          </children>

@@ -83,6 +83,20 @@ public class TicketDao {
         return ticket;
     }
 
+    public void removeAllTickets(){
+        ApiFuture<QuerySnapshot> future = db.collection(ticketPath).get();
+        List<QueryDocumentSnapshot> documents = null;
+
+        try {
+            documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                document.getReference().delete();
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Ticket> getAllTickets() {
         ApiFuture<QuerySnapshot> future = db.collection(ticketPath).get();
         List<QueryDocumentSnapshot> documents = null;

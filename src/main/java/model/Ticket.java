@@ -58,4 +58,11 @@ public class Ticket {
     public int hashCode() {
         return Objects.hash(screening, customer, price, seatId);
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s, %s, %s, %s, hall: %d, owner: %s, seat: %d", screening.getMovie(), screening.getMovieType(),
+                screening.getTime().toString(), screening.getDate().toString(), screening.getHall().getHallId(),
+                customer.getLogin(), seatId);
+    }
 }
