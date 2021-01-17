@@ -45,7 +45,7 @@ public class AdminPanelController implements Initializable {
     }
 
     public void discounts(ActionEvent event) {
-        System.out.println("Discounts button pressed");
+        Redirect.redirectTo(cls, event, "discountsList.fxml");
     }
 
     public void logout(ActionEvent event) {
