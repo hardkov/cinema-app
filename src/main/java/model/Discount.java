@@ -37,6 +37,6 @@ public class Discount {
 
     @Override
     public String toString() {
-        return String.format("%s, %.2f %% percent", name, value * 100);
+        return String.format("%s, %.2f %%", name, value * 100);
     }
 }
