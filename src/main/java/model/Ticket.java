@@ -12,6 +12,14 @@ public class Ticket {
     public Ticket() {
     }
 
+    public Ticket(String id, Screening screening, Customer customer, float price, int seatId) {
+        this.id = id;
+        this.screening = screening;
+        this.customer = customer;
+        this.price = price;
+        this.seatId = seatId;
+    }
+
     public Ticket(Screening screening, Customer customer, float price, int seatId) {
         this.screening = screening;
         this.customer = customer;
