@@ -30,7 +30,7 @@ public class WorkerPanelController implements Initializable {
     }
 
     public void tickets(ActionEvent event) {
-        System.out.println("Tickets button pressed");
+        Redirect.redirectTo(cls, event, "workerTicketsList.fxml");
     }
 
     public void logout(ActionEvent event) {
