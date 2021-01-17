@@ -69,8 +69,8 @@ public class Ticket {
 
     @Override
     public String toString(){
-        return String.format("%s, %s, %s, %s, hall: %d, owner: %s, seat: %d", screening.getMovie(), screening.getMovieType(),
+        return String.format("%s, %s, %s, %s, hall: %d, price: %.2f, owner: %s, seat: %d", screening.getMovie(), screening.getMovieType(),
                 screening.getTime().toString(), screening.getDate().toString(), screening.getHall().getHallId(),
-                customer.getLogin(), seatId);
+                price, customer.getLogin(), seatId);
     }
 }

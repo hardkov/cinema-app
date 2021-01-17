@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 public class CustomerTicketsListController implements Initializable {
     private Class cls = getClass();
     private TicketDao ticketDao = new TicketDao();
-//    private SortedList moviesSortedList;
-//    private ObservableList<Comparator<Movie>> moviesComparators;
 
     @FXML
     public ListView<Ticket> ticketsList;

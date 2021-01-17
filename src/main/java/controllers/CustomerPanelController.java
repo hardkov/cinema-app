@@ -23,17 +23,7 @@ public class CustomerPanelController implements Initializable {
     public Label userWelcomeMessage;
 
     public void initialize(URL url, ResourceBundle rb){
-//        TicketDao ticketDao = new TicketDao();
-//        for(Ticket ticket : ticketDao.getAllTickets()){
-//            System.out.println(ticket.getId());
-//        }
-
-        ScreeningDao screeningDao = new ScreeningDao();
-        for(Screening screening : screeningDao.getAllScreenings()){
-            System.out.println(screening.getId());
-        }
-
-            User currentUser = Session.getSession().getCurrentUser();
+        User currentUser = Session.getSession().getCurrentUser();
         if(currentUser != null){
             this.userWelcomeMessage.setText("Welcome, " + currentUser.getLogin());
         }
