@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerTicketsListController">
+   <children>
+      <VBox layoutX="250.0" layoutY="27.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ListView fx:id="ticketsList" prefHeight="319.0" prefWidth="600.0" />
+            <AnchorPane prefHeight="150.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="refund" layoutX="268.0" layoutY="55.0" mnemonicParsing="false" onAction="#refund" text="Refund" />
+                  <Button fx:id="home" layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#home" text="Home" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

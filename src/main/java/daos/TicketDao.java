@@ -86,7 +86,6 @@ public class TicketDao {
     public void removeAllTickets(){
         ApiFuture<QuerySnapshot> future = db.collection(ticketPath).get();
         List<QueryDocumentSnapshot> documents = null;
-
         try {
             documents = future.get().getDocuments();
             for (QueryDocumentSnapshot document : documents) {
