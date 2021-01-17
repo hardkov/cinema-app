@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WorkerScreeningsListController">
+   <children>
+      <VBox layoutX="250.0" layoutY="27.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="19.0" prefWidth="600.0">
+               <children>
+                  <HBox layoutX="373.0" layoutY="7.0" spacing="10.0" AnchorPane.bottomAnchor="7.0" AnchorPane.topAnchor="7.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="53.0" text="Title:" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="title" onAction="#onFilterByTitle" prefHeight="26.0" prefWidth="161.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="8.0" layoutY="7.0" spacing="10.0" />
+               </children>
+            </AnchorPane>
+            <ListView fx:id="screeningsList" prefHeight="208.0" prefWidth="600.0" />
+            <AnchorPane prefHeight="150.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="home" layoutX="530.0" layoutY="98.0" mnemonicParsing="false" onAction="#home" text="Home" />
+                  <Button fx:id="remove" layoutX="515.0" layoutY="56.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
+                  <Button fx:id="add" layoutX="543.0" layoutY="14.0" mnemonicParsing="false" onAction="#add" text="Add" />
+                  <ComboBox fx:id="movie" layoutX="102.0" layoutY="14.0" prefWidth="150.0" />
+                  <ComboBox fx:id="movieType" layoutX="102.0" layoutY="56.0" prefWidth="150.0" />
+                  <TextField fx:id="time" layoutX="314.0" layoutY="56.0" prefHeight="26.0" prefWidth="53.0" />
+                  <DatePicker fx:id="date" layoutX="314.0" layoutY="14.0" prefHeight="26.0" prefWidth="189.0" />
+                  <ComboBox fx:id="hall" layoutX="102.0" layoutY="98.0" prefHeight="26.0" prefWidth="150.0" />
+                  <TextField fx:id="basePrice" layoutX="354.0" layoutY="98.0" prefHeight="26.0" prefWidth="150.0" />
+                  <TextField fx:id="seatsLimit" layoutX="451.0" layoutY="56.0" prefHeight="26.0" prefWidth="53.0" />
+                  <Text layoutX="47.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movie" />
+                  <Text layoutX="14.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movie type" />
+                  <Text layoutX="269.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
+                  <Text layoutX="270.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+                  <Text layoutX="60.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall" />
+                  <Text layoutX="372.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seats limit" />
+                  <Text layoutX="271.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Base price" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

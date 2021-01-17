@@ -26,7 +26,7 @@ public class WorkerPanelController implements Initializable {
     }
 
     public void screenings(ActionEvent event) {
-        System.out.println("Screenings button pressed");
+        Redirect.redirectTo(cls, event, "workerScreeningList.fxml");
     }
 
     public void tickets(ActionEvent event) {
