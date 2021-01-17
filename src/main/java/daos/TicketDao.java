@@ -101,13 +101,14 @@ public class TicketDao {
     public Ticket getTicketFromDocumentSnapshot(DocumentSnapshot document) {
         ScreeningDao screeningDao = new ScreeningDao();
         CustomerDao customerDao = new CustomerDao();
+        String id = document.getId();
         DocumentReference screeningReference = document.get(screeningField, DocumentReference.class);
         Screening screening = screeningDao.getScreeningWithScreeningId(screeningReference.getId());
         DocumentReference customerReference = document.get(customerField, DocumentReference.class);
         Customer customer = customerDao.getCustomer(customerReference.getId());
         float price = document.get(priceField, Float.class);
         int seatId = document.get(seatIdField, Integer.class);
-        return new Ticket(screening, customer, price, seatId);
+        return new Ticket(id, screening, customer, price, seatId);
     }
 
     public List<Ticket> getAllTicketsWithQuery(QueryBuilder builder) {
