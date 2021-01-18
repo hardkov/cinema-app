@@ -10,7 +10,8 @@ public class DiscountValidators implements IValidator<Discount>{
 
     public DiscountValidators(){
         validators = new LinkedList<>();
-
+        validators.add(new DiscountNameValidator());
+        validators.add(new DiscountValueValidator());
     }
 
     @Override
