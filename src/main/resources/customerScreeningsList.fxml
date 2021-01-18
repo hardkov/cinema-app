@@ -22,6 +22,7 @@
                      </children>
                   </HBox>
                   <HBox layoutX="8.0" layoutY="7.0" spacing="10.0" />
+                  <Label fx:id="errorInfo" layoutX="14.0" layoutY="12.0" />
                </children>
             </AnchorPane>
             <ListView fx:id="screeningsList" prefHeight="290.0" prefWidth="600.0" />

@@ -1,30 +1,28 @@
 package controllers;
 
-import com.google.common.base.Predicates;
-import comparators.GenreComparator;
-import comparators.MovieCreatingDateComparator;
-import comparators.TitleComparator;
 import daos.DiscountDao;
 import daos.MovieDao;
 import daos.ScreeningDao;
 import daos.TicketDao;
 import helpers.Redirect;
-import helpers.TicketUtils;
+import helpers.TicketHelpers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.paint.Color;
 import model.*;
 import predicates.ScreeningPredicates;
 import utils.Session;
+import validators.TicketValidators;
 
 import java.net.URL;
-import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -40,6 +38,9 @@ public class CustomerScreeningsListController implements Initializable {
 
     private String noFilterTitleSelection = "All";
     private Discount noDiscountSelection = new Discount("None", 0);
+
+    @FXML
+    public Label errorInfo;
 
     @FXML
     public ComboBox<Discount> discount;
@@ -90,6 +91,8 @@ public class CustomerScreeningsListController implements Initializable {
 
         discount.setItems(discountsObservableList);
         discount.getSelectionModel().select(noDiscountSelection);
+
+        errorInfo.setText("");
     }
 
     public void onFilterByTitle(ActionEvent event) {
@@ -110,13 +113,21 @@ public class CustomerScreeningsListController implements Initializable {
         Discount selectedDiscount = discount.getSelectionModel().getSelectedItem();
 
         float price = screening.getBasePrice() * (1 - selectedDiscount.getValue());
-        int seatId = TicketUtils.getFreeSeatId(screening);
+        int seatId = TicketHelpers.getFreeSeatId(screening);
 
         Ticket ticket = new Ticket(screening, (Customer) Session.getSession().getCurrentUser(), price, seatId);
-        // validate ticket
-        ticketDao.addTicket(ticket);
 
-        Session.getSession().setCurrentlyViewedMovie(null);
-        Redirect.redirectTo(cls, event, "customerPanel.fxml");
+        TicketValidators ticketValidators = new TicketValidators();
+        LinkedList<String> feedback = new LinkedList<>();
+        if(ticketValidators.isValid(ticket, feedback)){
+            ticketDao.addTicket(ticket);
+
+            Session.getSession().setCurrentlyViewedMovie(null);
+            Redirect.redirectTo(cls, event, "customerPanel.fxml");
+        } else{
+            errorInfo.setText("Can't buy a ticket");
+            errorInfo.setTextFill(Color.RED);
+        }
+
     }
 }
