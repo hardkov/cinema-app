@@ -79,7 +79,8 @@ public class MoviesListController implements Initializable {
         Movie movie = new Movie(
                 title.getText(),
                 date.getValue(),
-                genre.getValue()
+                genre.getValue(),
+                90
         );
 
 
