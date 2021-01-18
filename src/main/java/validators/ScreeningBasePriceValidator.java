@@ -9,7 +9,7 @@ public class ScreeningBasePriceValidator implements IValidator<Screening> {
     @Override
     public boolean isValid(Screening obj, List<String> feedback) {
         if(obj.getBasePrice() < 0){
-            if(feedback != null) feedback.add("Base price cannot be negative");
+            if(feedback != null) feedback.add("Invalid base price");
             return false;
         }
 

@@ -8,7 +8,7 @@ public class ScreeningSeatsLimitValidator implements IValidator<Screening> {
     @Override
     public boolean isValid(Screening obj, List<String> feedback) {
         if(obj.getSeatsLimit() < 1 ){
-            if(feedback != null) feedback.add("Seats limit has to be more than 0");
+            if(feedback != null) feedback.add("Invalid seats limit value");
             return false;
         }
 
