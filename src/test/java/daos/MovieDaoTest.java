@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MovieDaoTest {
     private MovieDao dao = new MovieDao();
-    Movie movie = new Movie("Titanic", LocalDate.of(1998,4,2), MovieGenre.DRAMA);
+    Movie movie = new Movie("Titanic", LocalDate.of(1998,4,2), MovieGenre.DRAMA, 90);
 
     @Test
     public void testAddingAndGettingFromDataBase() {
@@ -29,7 +29,7 @@ class MovieDaoTest {
     @Test
     public void testAddingToDataBase() {
         // given
-        Movie newMovie = new Movie("Titanic2", LocalDate.of(1998,4,2), MovieGenre.DRAMA);
+        Movie newMovie = new Movie("Titanic2", LocalDate.of(1998,4,2), MovieGenre.DRAMA, 90);
         dao.removeMovie(newMovie);
         int prevSize = dao.getAllMovies().size();
         // when
@@ -42,7 +42,7 @@ class MovieDaoTest {
     @Test
     public void testRemovingFromDatabase() {
         // given
-        Movie movieToRemove = new Movie("Titanic3", LocalDate.of(1998,4,2), MovieGenre.DRAMA);
+        Movie movieToRemove = new Movie("Titanic3", LocalDate.of(1998,4,2), MovieGenre.DRAMA, 90);
         dao.addMovie(movieToRemove);
         // when
         dao.removeMovie(movieToRemove);

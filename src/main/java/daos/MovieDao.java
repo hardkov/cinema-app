@@ -23,6 +23,7 @@ public class MovieDao {
     private static final String titleField = "title";
     private static final String dateField = "date";
     private static final String genreField = "genre";
+    private static final String lengthField = "length";
 
     public MovieDao() {
         this.db = FirestoreDatabase.getInstance().getDb();
@@ -43,6 +44,7 @@ public class MovieDao {
         docData.put(genreField, movie.getGenre());
         String dateString = new DateConverter().getDateString(movie.getDate());
         docData.put(dateField, dateString);
+        docData.put(lengthField, movie.getLength());
         ApiFuture<WriteResult> writeResult = db.collection(moviePath).document(title).set(docData);
         try {
             writeResult.get();
@@ -71,7 +73,8 @@ public class MovieDao {
                 String movieDateString = document.get(dateField, String.class);
                 LocalDate moveDate = new DateConverter().getLocalDateFromString(movieDateString);
                 MovieGenre movieGenre = document.get(genreField, MovieGenre.class);
-                movie = new Movie(movieTitle, moveDate, movieGenre);
+                int length = document.get(lengthField, Integer.class);
+                movie = new Movie(movieTitle, moveDate, movieGenre, length);
             }
             else {
                 System.out.println(String.format("There is no document %s", docRef.getPath()));
@@ -97,7 +100,8 @@ public class MovieDao {
                 String movieDateString = document.get(dateField, String.class);
                 LocalDate moveDate = new DateConverter().getLocalDateFromString(movieDateString);
                 MovieGenre movieGenre = document.get(genreField, MovieGenre.class);
-                Movie movie = new Movie(movieTitle, moveDate, movieGenre);
+                int length = document.get(lengthField, Integer.class);
+                Movie movie = new Movie(movieTitle, moveDate, movieGenre, length);
                 movies.add(movie);
             }
         } catch (InterruptedException | ExecutionException e) {
