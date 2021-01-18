@@ -12,6 +12,8 @@ public class ScreeningValidators implements IValidator<Screening>{
     public ScreeningValidators(){
         validators = new LinkedList<IValidator>();
         validators.add(new ScreeningBasePriceValidator());
+        validators.add(new ScreeningSeatsLimitValidator());
+        validators.add(new ScreeningDateValidator());
     }
 
     @Override
