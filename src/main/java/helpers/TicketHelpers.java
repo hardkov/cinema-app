@@ -7,7 +7,7 @@ import model.Ticket;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TicketUtils {
+public class TicketHelpers {
     public static int getFreeSeatId(Screening screening){
         TicketDao ticketDao = new TicketDao();
         List<Ticket> allTickets = ticketDao.getAllTickets();
