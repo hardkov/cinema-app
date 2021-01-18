@@ -12,9 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import model.Discount;
 import model.Hall;
+import validators.DiscountValidators;
 import validators.HallValidators;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class DiscountsListController implements Initializable {
@@ -59,10 +61,16 @@ public class DiscountsListController implements Initializable {
         }
 
         Discount discount = new Discount(name.getText(), valueObj);
-        // validate here
 
-        discountDao.addDiscount(discount);
-        loadData();
+        DiscountValidators discountValidators = new DiscountValidators();
+        LinkedList<String> feedback = new LinkedList<>();
+        if(discountValidators.isValid(discount, feedback)){
+            discountDao.addDiscount(discount);
+            loadData();
+        } else{
+            errorInfo.setText("Invalid discount data");
+            errorInfo.setTextFill(Color.RED);
+        }
     }
 
     public void removeHall(ActionEvent event) {
