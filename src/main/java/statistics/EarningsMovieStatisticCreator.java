@@ -38,8 +38,8 @@ public class EarningsMovieStatisticCreator implements MovieStatisticCreator {
     }
 
     @Override
-    public Comparator<MovieStatistic> getComparator() {
-        return new EarningsComparator();
+    public Comparator<MovieStatistic> getComparator(SortOrder sortOrder) {
+        return new EarningsComparator(sortOrder);
     }
 
     @Override

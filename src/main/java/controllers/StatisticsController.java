@@ -81,18 +81,9 @@ public class StatisticsController implements Initializable {
         createSortedMovieList();
     }
 
-    private void createSortedMovieList() {
-        MovieStatisticCreator creator = moviesSortOrder.selectionModelProperty().get().getSelectedItem();
-        System.out.println(creator);
-        ObservableList<MovieStatistic> observableList = FXCollections.observableList(creator.getMovieStatistics());
-        moviesSortedList = observableList.sorted();
-        moviesSortedList.setComparator(creator.getComparator());
-        moviesList.setItems(moviesSortedList);
-    }
-
     @FXML
     public void onChangeFilterGenre() {
-        if (filterCheckBox.selectedProperty().getValue() == false) {
+        if (!filterCheckBox.selectedProperty().getValue()) {
             moviesList.setItems((moviesSortedList));
             return;
         }
@@ -104,6 +95,18 @@ public class StatisticsController implements Initializable {
 
     @FXML
     public void onChangeSortDirection() {
-        moviesSortedList.setComparator(moviesSortedList.getComparator().reversed());
+        MovieStatisticCreator creator = moviesSortOrder.selectionModelProperty().get().getSelectedItem();
+        SortOrder sortOrder = moviesSortDirection.getValue();
+        moviesSortedList.setComparator(creator.getComparator(sortOrder));
+    }
+
+    private void createSortedMovieList() {
+        MovieStatisticCreator creator = moviesSortOrder.selectionModelProperty().get().getSelectedItem();
+        System.out.println(creator);
+        ObservableList<MovieStatistic> observableList = FXCollections.observableList(creator.getMovieStatistics());
+        moviesSortedList = observableList.sorted();
+        SortOrder sortOrder = moviesSortDirection.getValue();
+        moviesSortedList.setComparator(creator.getComparator(sortOrder));
+        moviesList.setItems(moviesSortedList);
     }
 }

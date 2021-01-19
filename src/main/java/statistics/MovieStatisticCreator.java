@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface MovieStatisticCreator {
     List<MovieStatistic> getMovieStatistics();
-    Comparator<MovieStatistic> getComparator();
+    Comparator<MovieStatistic> getComparator(SortOrder sortOrder);
 }

@@ -38,8 +38,8 @@ public class PopularityMovieStatisticCreator implements MovieStatisticCreator {
     }
 
     @Override
-    public Comparator<MovieStatistic> getComparator() {
-        return new PopularityComparator();
+    public Comparator<MovieStatistic> getComparator(SortOrder sortOrder) {
+        return new PopularityComparator(sortOrder);
     }
 
     @Override
