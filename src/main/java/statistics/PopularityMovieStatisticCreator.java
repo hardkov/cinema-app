@@ -26,6 +26,7 @@ public class PopularityMovieStatisticCreator implements MovieStatisticCreator {
             if(!movieMap.containsKey(movie)) {
                 AggregateValue<Integer> value = new PopularityAggregateValue(1);
                 movieMap.put(movie, value);
+                continue;
             }
             AggregateValue<Integer> oldValue = movieMap.get(movie);
             oldValue.addValue(1);
