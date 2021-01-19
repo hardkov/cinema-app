@@ -2,6 +2,7 @@ package statistics;
 
 import comparators.PopularityComparator;
 import daos.TicketDao;
+import model.Customer;
 import model.Movie;
 import model.Ticket;
 
@@ -13,14 +14,15 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static statistics.MovieStatisticKind.POPULARITY;
+import static statistics.SortOrder.DESCENDING;
 
 public class PopularityMovieStatisticCreator implements MovieStatisticCreator {
 
     private TicketDao ticketDao = new TicketDao();
+    private List<Ticket> tickets = ticketDao.getAllTickets();
 
     @Override
     public List<MovieStatistic> getMovieStatistics(Predicate<Ticket> predicate) {
-        List<Ticket> tickets = ticketDao.getAllTickets();
         Map<Movie, AggregateValue<Integer>> movieMap = new HashMap<>();
         for (Ticket ticket: tickets) {
             if (predicate != null && predicate.test(ticket)) {
@@ -44,6 +46,28 @@ public class PopularityMovieStatisticCreator implements MovieStatisticCreator {
     @Override
     public Comparator<MovieStatistic> getComparator(SortOrder sortOrder) {
         return new PopularityComparator(sortOrder);
+    }
+
+    public Movie getMoviePropositionForCustomer(Customer customer) {
+        List<MovieStatistic> allMovies = getMovieStatistics(null);
+        List<MovieStatistic> watchedMovies = getMovieStatistics(ticket -> !ticket.getCustomer().equals(customer));
+        Comparator<MovieStatistic> comparator = getComparator(DESCENDING);
+        allMovies.sort(comparator);
+        watchedMovies.sort(comparator);
+        System.out.println(allMovies);
+        System.out.println(watchedMovies);
+        for (MovieStatistic ms: watchedMovies) {
+            if (ms.getMovie().getTitle().equals(allMovies.get(0).getMovie().getTitle())) {
+                allMovies.remove(0);
+            } else {
+                break;
+            }
+        }
+        if (allMovies.isEmpty()) {
+            return null;
+        } else {
+            return allMovies.get(0).getMovie();
+        }
     }
 
     @Override
