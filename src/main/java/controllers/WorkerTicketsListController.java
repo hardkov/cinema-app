@@ -41,7 +41,11 @@ public class WorkerTicketsListController implements Initializable {
 
     public void refund(ActionEvent event) {
         Ticket ticket = ticketsList.getSelectionModel().getSelectedItem();
-        ticketDao.removeTicket(ticket);
+
+        if(ticket != null){
+            ticketDao.removeTicket(ticket);
+        }
+
         loadData();
     }
 }
