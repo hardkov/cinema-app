@@ -13,6 +13,7 @@ public class MovieValidators implements IValidator<Movie>{
         validators = new LinkedList<IValidator>();
         validators.add(new MovieTitleValidator());
         validators.add(new MovieDateValidator());
+        validators.add(new MovieLengthValidator());
     }
 
     @Override
