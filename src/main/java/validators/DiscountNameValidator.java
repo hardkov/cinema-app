@@ -12,7 +12,7 @@ public class DiscountNameValidator implements IValidator<Discount>{
     public boolean isValid(Discount obj, List<String> feedback) {
         String name = obj.getName();
         if(name.length() < 1){
-            if(feedback != null) feedback.add("Discount name must be at least one character long");
+            if(feedback != null) feedback.add("Discount name is too short");
             return false;
         }
 
