@@ -103,7 +103,7 @@ public class StatisticsController implements Initializable {
     private void createSortedMovieList() {
         MovieStatisticCreator creator = moviesSortOrder.selectionModelProperty().get().getSelectedItem();
         System.out.println(creator);
-        ObservableList<MovieStatistic> observableList = FXCollections.observableList(creator.getMovieStatistics());
+        ObservableList<MovieStatistic> observableList = FXCollections.observableList(creator.getMovieStatistics(null));
         moviesSortedList = observableList.sorted();
         SortOrder sortOrder = moviesSortDirection.getValue();
         moviesSortedList.setComparator(creator.getComparator(sortOrder));
