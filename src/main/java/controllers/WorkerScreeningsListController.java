@@ -158,7 +158,11 @@ public class WorkerScreeningsListController implements Initializable {
 
     public void remove(ActionEvent event) {
         Screening screening = screeningsList.getSelectionModel().getSelectedItem();
-        screeningDao.removeScreening(screening);
+
+        if(screening != null){
+            screeningDao.removeScreening(screening);
+        }
+
         loadData();
     }
 }

@@ -112,6 +112,8 @@ public class CustomerScreeningsListController implements Initializable {
         Screening screening = screeningsList.getSelectionModel().getSelectedItem();
         Discount selectedDiscount = discount.getSelectionModel().getSelectedItem();
 
+        if(screening == null) return;
+
         float price = screening.getBasePrice() * (1 - selectedDiscount.getValue());
         int seatId = TicketHelpers.getFreeSeatId(screening);
 

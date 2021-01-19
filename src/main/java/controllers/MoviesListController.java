@@ -108,7 +108,11 @@ public class MoviesListController implements Initializable {
 
     public void removeMovie(ActionEvent event) {
         Movie movie = moviesList.getSelectionModel().getSelectedItem();
-        movieDao.removeMovie(movie);
+
+        if(movie != null){
+            movieDao.removeMovie(movie);
+        }
+
         loadData();
     }
 

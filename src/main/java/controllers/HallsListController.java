@@ -83,7 +83,10 @@ public class HallsListController implements Initializable {
     public void removeHall(ActionEvent event) {
         Hall hall = hallsList.getSelectionModel().getSelectedItem();
 
-        hallDao.removeHall(hall);
+        if(hall != null){
+            hallDao.removeHall(hall);
+        }
+
         loadData();
     }
 }
