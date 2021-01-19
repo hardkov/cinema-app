@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.rpc.Help;
 import comparators.GenreComparator;
 import comparators.MovieCreatingDateComparator;
 import comparators.TitleComparator;
@@ -22,6 +23,7 @@ import validators.MovieValidators;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -94,11 +96,12 @@ public class MoviesListController implements Initializable {
         );
 
         MovieValidators movieValidators = new MovieValidators();
-        if(movieValidators.isValid(movie, null)){
+        LinkedList<String> feedback = new LinkedList<>();
+        if(movieValidators.isValid(movie, feedback)){
             movieDao.addMovie(movie);
             loadData();
         } else{
-            errorInfo.setText("Invalid movie details");
+            errorInfo.setText(feedback.getFirst());
             errorInfo.setTextFill(Color.RED);
         }
     }

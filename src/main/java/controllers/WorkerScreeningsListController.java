@@ -151,7 +151,7 @@ public class WorkerScreeningsListController implements Initializable {
             screeningDao.addScreening(screening);
             loadData();
         } else{
-            errorInfo.setText("Invalid screening data");
+            errorInfo.setText(feedback.getFirst());
             errorInfo.setTextFill(Color.RED);
         }
     }

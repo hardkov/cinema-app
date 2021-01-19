@@ -17,6 +17,8 @@ import utils.Session;
 import validators.PasswordValidator;
 import validators.UserValidators;
 
+import java.util.LinkedList;
+
 public class SetEmployeePasswordController {
     private Class cls = getClass();
     private UserDao userDao = new UserDao();
@@ -30,8 +32,9 @@ public class SetEmployeePasswordController {
 
     public void setPassword(ActionEvent event) {
         PasswordValidator passwordValidator = new PasswordValidator();
-        if(!passwordValidator.isValid(password.getText(), null)){
-            errorInfo.setText("Invalid password");
+        LinkedList<String> feedback = new LinkedList<>();
+        if(!passwordValidator.isValid(password.getText(), feedback)){
+            errorInfo.setText(feedback.getFirst());
             errorInfo.setTextFill(Color.RED);
             return;
         }

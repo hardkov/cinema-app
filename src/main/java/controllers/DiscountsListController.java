@@ -37,7 +37,6 @@ public class DiscountsListController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb){
         loadData();
-        errorInfo.setText("");
     }
 
     public void home(ActionEvent event){
@@ -47,6 +46,7 @@ public class DiscountsListController implements Initializable {
     private void loadData(){
         discountsList.getItems().setAll(discountDao.getAllDiscounts());
         discountsList.getSelectionModel().selectFirst();
+        errorInfo.setText("");
     }
 
     public void addDiscount(ActionEvent event) {
@@ -65,7 +65,7 @@ public class DiscountsListController implements Initializable {
             discountDao.addDiscount(discount);
             loadData();
         } else{
-            errorInfo.setText("Invalid discount data");
+            errorInfo.setText(feedback.getFirst());
             errorInfo.setTextFill(Color.RED);
         }
     }

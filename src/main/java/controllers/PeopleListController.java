@@ -98,11 +98,12 @@ public class PeopleListController implements Initializable {
                 permissions.getValue()));
 
         UserValidators userValidators = new UserValidators();
-        if(userValidators.isValid(employee, null)){
+        LinkedList<String> feedback = new LinkedList<>();
+        if(userValidators.isValid(employee, feedback)){
             employeeDao.addEmployee(employee);
             loadData();
         } else{
-            errorInfo.setText("Invalid user details");
+            errorInfo.setText(feedback.getFirst());
             errorInfo.setTextFill(Color.RED);
         }
     }

@@ -19,6 +19,7 @@ import validators.HallValidators;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -41,7 +42,6 @@ public class HallsListController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb){
         loadData();
-        errorInfo.setText("");
     }
 
     public void home(ActionEvent event){
@@ -50,6 +50,7 @@ public class HallsListController implements Initializable {
 
     private void loadData(){
         hallsList.getItems().setAll((hallDao.getAllHalls()));
+        errorInfo.setText("");
     }
 
     public void addHall(ActionEvent event) {
@@ -69,11 +70,12 @@ public class HallsListController implements Initializable {
         Hall hall = new Hall(hallIdInt, seatsLimitInt);
 
         HallValidators hallValidators = new HallValidators();
-        if(hallValidators.isValid(hall, null)){
+        LinkedList<String> feedback = new LinkedList<>();
+        if(hallValidators.isValid(hall, feedback)){
             hallDao.addHall(hall);
             loadData();
         } else{
-            errorInfo.setText("Invalid hall details");
+            errorInfo.setText(feedback.getFirst());
             errorInfo.setTextFill(Color.RED);
         }
     }

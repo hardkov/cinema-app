@@ -125,7 +125,7 @@ public class CustomerScreeningsListController implements Initializable {
             Session.getSession().setCurrentlyViewedMovie(null);
             Redirect.redirectTo(cls, event, "customerPanel.fxml");
         } else{
-            errorInfo.setText("Can't buy a ticket");
+            errorInfo.setText(feedback.getFirst());
             errorInfo.setTextFill(Color.RED);
         }
 

@@ -49,11 +49,11 @@ public class RegisterController {
 
         CustomerValidators customerValidators = new CustomerValidators();
         PasswordValidator passwordValidator = new PasswordValidator();
-        List<String> feedback = new LinkedList<>();
+        LinkedList<String> feedback = new LinkedList<>();
 
         if(!customerValidators.isValid(customer, feedback) ||
                 !passwordValidator.isValid(password.getText(), feedback)){
-            actionInfo.setText("Invalid input");
+            actionInfo.setText(feedback.getFirst());
             actionInfo.setTextFill(Color.RED);
         } else{
             customerDao.addCustomer(customer);
