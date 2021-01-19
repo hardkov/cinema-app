@@ -41,4 +41,9 @@ public class Customer extends User {
     public int hashCode() {
         return Objects.hash(dateOfBirth);
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s, %s", super.toString(), email);
+    }
 }
