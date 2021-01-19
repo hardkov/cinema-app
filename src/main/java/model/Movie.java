@@ -7,13 +7,15 @@ public class Movie {
     private String title;
     private LocalDate date;
     private MovieGenre genre;
+    private int length;
 
     public Movie() {}
 
-    public Movie(String title, LocalDate date, MovieGenre genre) {
+    public Movie(String title, LocalDate date, MovieGenre genre, int length) {
         this.title = title;
         this.date = date;
         this.genre = genre;
+        this.length = length;
     }
 
     public String getTitle() {
@@ -26,6 +28,10 @@ public class Movie {
 
     public MovieGenre getGenre() {
         return genre;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     @Override

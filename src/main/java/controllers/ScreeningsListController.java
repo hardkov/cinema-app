@@ -27,8 +27,8 @@ public class ScreeningsListController implements Initializable {
 
     private void loadData(){
         list.removeAll(list);
-        Movie movie1 = new Movie("Movie1", LocalDate.of(1999, 9, 12), MovieGenre.DRAMA);
-        Movie movie2 = new Movie("Movie2", LocalDate.of(1998, 9, 12), MovieGenre.COMEDY);
+        Movie movie1 = new Movie("Movie1", LocalDate.of(1999, 9, 12), MovieGenre.DRAMA, 90);
+        Movie movie2 = new Movie("Movie2", LocalDate.of(1998, 9, 12), MovieGenre.COMEDY, 90);
         MovieType movieType = MovieType.MOVIE_2D;
         Hall hall = new Hall(1, 20);
         int seatsLimit = 15;
