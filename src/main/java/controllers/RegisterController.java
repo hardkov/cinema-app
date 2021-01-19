@@ -1,6 +1,7 @@
 package controllers;
 
 import daos.CustomerDao;
+import helpers.EmailService;
 import helpers.Redirect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,6 +60,9 @@ public class RegisterController {
             customerDao.addCustomer(customer);
             Session.getSession().setCurrentUser(customer);
             Redirect.redirectTo(cls, event, "customerPanel.fxml");
+
+            EmailService emailService = new EmailService();
+            emailService.sendMail(customer.getEmail(), "Welcome", "Welcome to our Cinema!");
         }
     }
 
