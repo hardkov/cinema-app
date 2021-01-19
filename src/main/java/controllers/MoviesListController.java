@@ -32,6 +32,9 @@ public class MoviesListController implements Initializable {
     private ObservableList<Comparator<Movie>> moviesComparators;
 
     @FXML
+    public TextField length;
+
+    @FXML
     public Label errorInfo;
 
     @FXML
@@ -76,13 +79,19 @@ public class MoviesListController implements Initializable {
     }
 
     public void addMovie(ActionEvent event) {
+        int lengthValue = -1;
+
+        try {
+            lengthValue = Integer.valueOf(length.getText());
+        } catch (NumberFormatException e){
+        }
+
         Movie movie = new Movie(
                 title.getText(),
                 date.getValue(),
                 genre.getValue(),
-                90
+                lengthValue
         );
-
 
         MovieValidators movieValidators = new MovieValidators();
         if(movieValidators.isValid(movie, null)){
