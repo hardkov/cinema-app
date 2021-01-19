@@ -50,17 +50,14 @@ public class DiscountsListController implements Initializable {
     }
 
     public void addDiscount(ActionEvent event) {
-        Float valueObj;
+        float valueValue = -1;
 
         try {
-            valueObj = Float.parseFloat(value.getText());
+            valueValue = Float.parseFloat(value.getText());
         } catch (NumberFormatException e){
-            errorInfo.setText("Invalid number format");
-            errorInfo.setTextFill(Color.RED);
-            return;
         }
 
-        Discount discount = new Discount(name.getText(), valueObj);
+        Discount discount = new Discount(name.getText(), valueValue);
 
         DiscountValidators discountValidators = new DiscountValidators();
         LinkedList<String> feedback = new LinkedList<>();
