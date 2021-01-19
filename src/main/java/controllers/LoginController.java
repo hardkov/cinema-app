@@ -1,5 +1,6 @@
 package controllers;
 import daos.*;
+import helpers.EmailService;
 import helpers.Redirect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import model.*;
+import statistics.PopularityMovieStatisticCreator;
 import utils.PasswordUtils;
 import utils.Session;
 
@@ -22,6 +24,9 @@ public class LoginController {
     private Class cls = getClass();
     EmployeeDao employeeDao = new EmployeeDao();
     CustomerDao customerDao = new CustomerDao();
+
+    private final static String contentForRecommendedMovie = "Recommended movie for you: ";
+    private final static String subjectForRecommendedMovie = "Recommended movie";
 
     @FXML
     public Label actionInfo;
@@ -47,6 +52,17 @@ public class LoginController {
             } else if(permission == Permission.WORKER) {
                 Redirect.redirectTo(cls, event, "workerPanel.fxml");
             } else{
+                EmailService emailService = new EmailService();
+                PopularityMovieStatisticCreator creator = new PopularityMovieStatisticCreator();
+
+                String email = ((Customer) user).getEmail();
+                Movie recommendedMovie = creator.getMoviePropositionForCustomer((Customer) user);
+
+                if(recommendedMovie != null){
+                    emailService.sendMail(email, subjectForRecommendedMovie,
+                            contentForRecommendedMovie + recommendedMovie.getTitle());
+                }
+
                 Redirect.redirectTo(cls, event, "customerPanel.fxml");
             }
 
