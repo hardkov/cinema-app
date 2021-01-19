@@ -17,6 +17,8 @@ public class TicketDao {
 
     Firestore db;
     GenericDao<Ticket> ticketGenericDao;
+    private Map<String, Screening> cachedScreeningsMap;
+    private Map<String, Customer> cachedCustomersMap;
 
     public static final String screeningField = "screening";
     public static final String customerField = "customer";
@@ -26,6 +28,8 @@ public class TicketDao {
     public TicketDao() {
         this.db = FirestoreDatabase.getInstance().getDb();
         this.ticketGenericDao = new GenericDao<>(Ticket.class);
+        cachedScreeningsMap = new HashMap<>();
+        cachedCustomersMap = new HashMap<>();
     }
 
     public boolean addTicket(Ticket ticket) {
@@ -116,9 +120,19 @@ public class TicketDao {
         CustomerDao customerDao = new CustomerDao();
         String id = document.getId();
         DocumentReference screeningReference = document.get(screeningField, DocumentReference.class);
-        Screening screening = screeningDao.getScreeningWithScreeningId(screeningReference.getId());
+        String screeningId = screeningReference.getId();
+        Screening screening = cachedScreeningsMap.get(screeningId);
+        if (screening == null){
+            screening = screeningDao.getScreeningWithScreeningId(screeningReference.getId());
+            cachedScreeningsMap.put(screeningId, screening);
+        }
         DocumentReference customerReference = document.get(customerField, DocumentReference.class);
-        Customer customer = customerDao.getCustomer(customerReference.getId());
+        String customerId = customerReference.getId();
+        Customer customer = cachedCustomersMap.get(customerId);
+        if (customer == null) {
+            customer = customerDao.getCustomer(customerReference.getId());
+            cachedCustomersMap.put(customerId, customer);
+        }
         float price = document.get(priceField, Float.class);
         int seatId = document.get(seatIdField, Integer.class);
         return new Ticket(id, screening, customer, price, seatId);

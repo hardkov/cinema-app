@@ -29,7 +29,7 @@ public class AdminPanelController implements Initializable {
     }
 
     public void statistics(ActionEvent event) {
-        System.out.println("Statistics button pressed");
+        Redirect.redirectTo(cls, event, "statistics.fxml");
     }
 
     public void people(ActionEvent event) {

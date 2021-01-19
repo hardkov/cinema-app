@@ -81,6 +81,11 @@ public class LoginController {
         }
     }
 
+    @FXML
+    public void onEnter(ActionEvent ae){
+        login(ae);
+    }
+
     public void register(ActionEvent event) {
         Redirect.redirectTo(cls, event, "register.fxml");
     }

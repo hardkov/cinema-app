@@ -14,7 +14,7 @@ class TicketDaoTest {
     Ticket ticket = new Ticket(
             new Screening(
                     "JKdJNvFw3LHaISMjJNBE",
-                new Movie("Titanic", LocalDate.of(1992, 02, 02), MovieGenre.COMEDY),
+                new Movie("Titanic", LocalDate.of(1992, 02, 02), MovieGenre.COMEDY, 90),
                 MovieType.MOVIE_2D,
                 LocalTime.of(14, 40),
                 LocalDate.of(2021, 01, 10),
@@ -22,7 +22,7 @@ class TicketDaoTest {
                 30,
                 14.0f
             ),
-            new Customer("addaac", "Ada", "Bera", null, LocalDate.of(1998, 3, 20), "adaber@gmail.com"),
+            new Customer("gregory", "Ada", "Bera", "trudne", LocalDate.of(1998, 3, 20), "adaber@gmail.com"),
             14.0f,
             15
     );
