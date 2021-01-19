@@ -2,7 +2,6 @@ package controllers;
 
 import daos.*;
 import helpers.Redirect;
-import helpers.TicketUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -10,14 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import model.*;
 import predicates.ScreeningPredicates;
 import utils.Session;
+import validators.ScreeningValidators;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -31,6 +34,9 @@ public class WorkerScreeningsListController implements Initializable {
     private FilteredList screeningFilteredList;
 
     private String noFilterTitleSelection = "All";
+
+    @FXML
+    public Label errorInfo;
 
     @FXML
     public TextField seatsLimit;
@@ -93,6 +99,8 @@ public class WorkerScreeningsListController implements Initializable {
         screeningFilteredList = screeningsObservableList.filtered(ScreeningPredicates.alwaysTrue());
         screeningsList.setItems(screeningFilteredList);
         screeningsList.getSelectionModel().selectFirst();
+
+        errorInfo.setText("");
     }
 
     public void onFilterByTitle(ActionEvent event) {
@@ -109,21 +117,43 @@ public class WorkerScreeningsListController implements Initializable {
     }
 
     public void add(ActionEvent event) {
-        // validate input from user
+        int seatsLimitValue = -1;
+        float basePriceValue = -1;
+        LocalTime timeObj = null;
+
+        try{
+            seatsLimitValue = Integer.valueOf(seatsLimit.getText());
+        } catch (NumberFormatException e){
+        }
+
+        try{
+            basePriceValue = Float.valueOf(basePrice.getText());
+        } catch (NumberFormatException e){
+        }
+
+        try{
+            timeObj = LocalTime.parse(time.getText());
+        } catch (DateTimeParseException e){
+        }
 
         Movie movieObj = movieDao.getMovie(movie.getSelectionModel().getSelectedItem());
         MovieType movieTypeObj = movieType.getSelectionModel().getSelectedItem();
         LocalDate dateObj = date.getValue();
-        LocalTime timeObj = LocalTime.parse(time.getText());
         Hall hallObj = hall.getSelectionModel().getSelectedItem();
-        int seatsLimitValue = Integer.valueOf(seatsLimit.getText());
-        float basePriceValue = Float.valueOf(basePrice.getText());
+
 
         Screening screening = new Screening(movieObj, movieTypeObj, timeObj, dateObj, hallObj,
                 seatsLimitValue, basePriceValue);
-        // validate screening
-        screeningDao.addScreening(screening);
-        loadData();
+
+        ScreeningValidators screeningValidators = new ScreeningValidators();
+        LinkedList<String> feedback = new LinkedList<>();
+        if(screeningValidators.isValid(screening, feedback)){
+            screeningDao.addScreening(screening);
+            loadData();
+        } else{
+            errorInfo.setText("Invalid screening data");
+            errorInfo.setTextFill(Color.RED);
+        }
     }
 
     public void remove(ActionEvent event) {

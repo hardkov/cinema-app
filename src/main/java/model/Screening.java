@@ -87,8 +87,8 @@ public class Screening {
 
     @Override
     public String toString(){
-        return String.format("%s, %s, %s, %s, hall: %d, seats limit: %d, base price: %.2f", movie.getTitle(),
-                movieType.toString(), date.toString(), time.toString(),
+        return String.format("%s, %s, %s, %s, length: %d, hall: %d, seats limit: %d, base price: %.2f", movie.getTitle(),
+                movieType.toString(), date.toString(), time.toString(), movie.getLength(),
                 hall.getHallId(), seatsLimit, basePrice);
     }
 }

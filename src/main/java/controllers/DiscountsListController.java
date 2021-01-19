@@ -12,9 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import model.Discount;
 import model.Hall;
+import validators.DiscountValidators;
 import validators.HallValidators;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class DiscountsListController implements Initializable {
@@ -48,21 +50,24 @@ public class DiscountsListController implements Initializable {
     }
 
     public void addDiscount(ActionEvent event) {
-        Float valueObj;
+        float valueValue = -1;
 
         try {
-            valueObj = Float.parseFloat(value.getText());
+            valueValue = Float.parseFloat(value.getText());
         } catch (NumberFormatException e){
-            errorInfo.setText("Invalid number format");
-            errorInfo.setTextFill(Color.RED);
-            return;
         }
 
-        Discount discount = new Discount(name.getText(), valueObj);
-        // validate here
+        Discount discount = new Discount(name.getText(), valueValue);
 
-        discountDao.addDiscount(discount);
-        loadData();
+        DiscountValidators discountValidators = new DiscountValidators();
+        LinkedList<String> feedback = new LinkedList<>();
+        if(discountValidators.isValid(discount, feedback)){
+            discountDao.addDiscount(discount);
+            loadData();
+        } else{
+            errorInfo.setText("Invalid discount data");
+            errorInfo.setTextFill(Color.RED);
+        }
     }
 
     public void removeHall(ActionEvent event) {

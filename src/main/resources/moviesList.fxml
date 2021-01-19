@@ -38,6 +38,8 @@
                   <Text layoutX="18.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
                   <Button fx:id="home" layoutX="524.0" layoutY="78.0" mnemonicParsing="false" onAction="#home" text="Home" />
                   <ComboBox fx:id="genre" layoutX="62.0" layoutY="79.0" prefWidth="150.0" />
+                  <TextField fx:id="length" layoutX="334.0" layoutY="8.0" prefHeight="26.0" prefWidth="83.0" />
+                  <Text layoutX="278.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length" />
                </children>
             </AnchorPane>
          </children>

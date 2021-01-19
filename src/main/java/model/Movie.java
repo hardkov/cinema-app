@@ -51,6 +51,6 @@ public class Movie {
 
     @Override
     public String toString(){
-        return String.format("%s, %s, genre: %s", title, date.toString(), genre);
+        return String.format("%s, %s, genre: %s, length: %d", title, date.toString(), genre, length);
     }
 }

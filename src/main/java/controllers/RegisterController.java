@@ -61,4 +61,8 @@ public class RegisterController {
             Redirect.redirectTo(cls, event, "customerPanel.fxml");
         }
     }
+
+    public void login(ActionEvent event) {
+        Redirect.redirectTo(cls, event, "login.fxml");
+    }
 }

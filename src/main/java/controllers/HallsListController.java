@@ -53,22 +53,23 @@ public class HallsListController implements Initializable {
     }
 
     public void addHall(ActionEvent event) {
-        Integer hallIdInt, seatsLimitInt;
+        int hallIdInt = -1;
+        int seatsLimitInt = -1;
+
+        try {
+            seatsLimitInt = Integer.parseInt(seatsLimit.getText());
+        } catch (NumberFormatException e){
+        }
 
         try {
             hallIdInt = Integer.parseInt(hallId.getText());
-            seatsLimitInt = Integer.parseInt(seatsLimit.getText());
         } catch (NumberFormatException e){
-            errorInfo.setText("Invalid number format");
-            errorInfo.setTextFill(Color.RED);
-            return;
         }
 
         Hall hall = new Hall(hallIdInt, seatsLimitInt);
 
         HallValidators hallValidators = new HallValidators();
         if(hallValidators.isValid(hall, null)){
-            System.out.println(hall);
             hallDao.addHall(hall);
             loadData();
         } else{
