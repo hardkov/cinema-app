@@ -54,8 +54,7 @@ public class PopularityMovieStatisticCreator implements MovieStatisticCreator {
         Comparator<MovieStatistic> comparator = getComparator(DESCENDING);
         allMovies.sort(comparator);
         watchedMovies.sort(comparator);
-        System.out.println(allMovies);
-        System.out.println(watchedMovies);
+
         for (MovieStatistic ms: watchedMovies) {
             if (ms.getMovie().getTitle().equals(allMovies.get(0).getMovie().getTitle())) {
                 allMovies.remove(0);
