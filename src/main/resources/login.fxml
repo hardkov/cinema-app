@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
       <AnchorPane layoutX="164.0" layoutY="67.0" prefHeight="267.0" prefWidth="272.0" style="-fx-background-position: center;">
          <children>
             <TextField fx:id="username" layoutX="51.0" layoutY="14.0" promptText="username" />
             <Button fx:id="login" layoutX="51.0" layoutY="127.0" mnemonicParsing="false" onAction="#login" text="Login" />
-            <PasswordField fx:id="password" layoutX="51.0" layoutY="70.0" promptText="password" />
+            <PasswordField fx:id="password" layoutX="51.0" layoutY="70.0" onAction="#onEnter" promptText="password" />
             <Label fx:id="actionInfo" alignment="CENTER" layoutY="175.0" prefHeight="16.0" prefWidth="272.0" text="Type in your credentials" textAlignment="CENTER" />
          </children>
       </AnchorPane>
