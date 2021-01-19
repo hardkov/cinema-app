@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
     private UserDao dao = new UserDao();
-    private User user = new User("grzjan","Grzegorz", "Janosz");
+    private User user = new User("grzjan","Grzegorz", "Janosz", "haslo");
 
     @Test
     public void testAddingAndGettingFromDatabase() {
@@ -30,7 +30,7 @@ class UserDaoTest {
     public void testAddingToDataBase() {
         // given
         int prevSize = dao.getAllUsers().size();
-        User newUser = new User("adaber","Adam", "Bera");
+        User newUser = new User("adaber","Adam", "Bera", "haslo2");
         // when
         dao.addUser(newUser);
         // then
@@ -41,7 +41,7 @@ class UserDaoTest {
     @Test
     public void testRemovingFromDatabase() {
         // given
-        User userToRemove = new User("adaber","Adam", "Bera");
+        User userToRemove = new User("adaber2","Adam", "Bera", "haslo2");
         dao.addUser(userToRemove);
         // when
         dao.removeUser(userToRemove);

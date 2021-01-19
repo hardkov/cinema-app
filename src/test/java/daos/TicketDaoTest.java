@@ -22,7 +22,7 @@ class TicketDaoTest {
                 30,
                 14.0f
             ),
-            new Customer("addaac", "Ada", "Bera", null, LocalDate.of(1998, 3, 20), "adaber@gmail.com"),
+            new Customer("gregory", "Ada", "Bera", "trudne", LocalDate.of(1998, 3, 20), "adaber@gmail.com"),
             14.0f,
             15
     );
