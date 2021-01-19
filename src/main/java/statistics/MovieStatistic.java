@@ -3,12 +3,15 @@ package statistics;
 import model.Movie;
 
 public class MovieStatistic {
-    Movie movie;
-    AggregateValue aggregateValue;
 
-    public MovieStatistic(Movie movie, AggregateValue aggregateValue) {
+    private Movie movie;
+    private AggregateValue aggregateValue;
+    private MovieStatisticKind kind;
+
+    public MovieStatistic(Movie movie, AggregateValue aggregateValue, MovieStatisticKind kind) {
         this.movie = movie;
         this.aggregateValue = aggregateValue;
+        this.kind = kind;
     }
 
     public Movie getMovie() {
@@ -17,6 +20,10 @@ public class MovieStatistic {
 
     public AggregateValue getAggregateValue() {
         return aggregateValue;
+    }
+
+    public MovieStatisticKind getKind() {
+        return kind;
     }
 
     @Override

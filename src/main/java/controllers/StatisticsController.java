@@ -9,16 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import model.Movie;
 import model.MovieGenre;
-import statistics.MovieStatistic;
-import statistics.MovieStatisticCreator;
-import statistics.PopularityMovieStatisticCreator;
-import statistics.SortOrder;
+import statistics.*;
 
 import java.net.URL;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class StatisticsController implements Initializable {
     private Class cls = getClass();
@@ -50,7 +45,10 @@ public class StatisticsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         genreComboBox.getItems().setAll(MovieGenre.values());
 
-        movieStatisticCreators = FXCollections.observableArrayList(new PopularityMovieStatisticCreator());
+        movieStatisticCreators = FXCollections.observableArrayList(
+                new PopularityMovieStatisticCreator(),
+                new EarningsMovieStatisticCreator()
+        );
         moviesSortOrder.getItems().setAll(movieStatisticCreators);
         moviesSortOrder.selectionModelProperty().addListener((observable, oldValue, newValue) -> {
             onChangeMovieStatisticCreator();
@@ -66,6 +64,7 @@ public class StatisticsController implements Initializable {
             onChangeFilterGenre();
         });
         genreComboBox.disableProperty().bind(filterCheckBox.selectedProperty().not());
+        moviesList.setCellFactory(param -> new CellFactory());
 
         moviesSortOrder.getSelectionModel().selectFirst();
         moviesSortDirection.getSelectionModel().selectFirst();
