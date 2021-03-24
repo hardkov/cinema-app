@@ -31,5 +31,6 @@ This is just a brief overview. Head to the docs folder for more detailed describ
 * Codebase is not the cleanest one (especially controllers) due to time managament issues
 
 ## Written By
-@hardkov - controllers, docs, GUI - code  
-@Saollin - DAO, GUI - design, auth, statistics
+
+* [@hardkov](https://github.com/hardkov) - controllers, docs, GUI - code   
+* [@Saollin](https://github.com/Saollin) - DAO, GUI - design, auth, statistics
